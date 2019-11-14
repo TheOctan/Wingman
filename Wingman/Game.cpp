@@ -190,7 +190,7 @@ void Game::initUI()
 void Game::initMap()
 {
 	this->stage = new Stage(10, 10);
-	this->stage->loadStage("lel.wmap", this->mainView);
+	this->stage->loadStage("levels/lel.wmap", this->mainView);
 }
 
 void Game::initialize()
