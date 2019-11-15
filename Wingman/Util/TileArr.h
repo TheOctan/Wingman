@@ -8,7 +8,7 @@ class TileArr
 private:
 	unsigned cap;
 	unsigned nrOfTiles;
-	T* *tiles;
+	T** tiles;
 
 	void initialize(unsigned from);
 public:
@@ -36,7 +36,7 @@ TileArr<T>::TileArr(unsigned cap)
 	this->cap = cap;
 	this->nrOfTiles = 0;
 
-	this->tiles = new T*[this->cap];
+	this->tiles = new T * [this->cap];
 
 	this->initialize(0);
 }
@@ -47,7 +47,7 @@ TileArr<T>::TileArr(const TileArr& obj)
 	this->cap = obj.cap;
 	this->nrOfTiles = obj.nrOfTiles;
 
-	this->tiles = new T*[this->cap];
+	this->tiles = new T * [this->cap];
 
 	for (size_t i = 0; i < this->cap; i++)
 	{
@@ -89,7 +89,7 @@ void TileArr<T>::operator=(const TileArr& obj)
 	this->cap = obj.cap;
 	this->nrOfTiles = obj.nrOfTiles;
 
-	this->tiles = new T*[this->cap];
+	this->tiles = new T * [this->cap];
 
 	for (size_t i = 0; i < this->cap; i++)
 	{
@@ -158,7 +158,7 @@ void TileArr<T>::resize(unsigned newCap)
 	if (newCap <= 0)
 		throw("BAD NEWCAP TILEARR RESIZE");
 
-	T* *tempArr = new T*[newCap];
+	T** tempArr = new T * [newCap];
 
 	for (size_t i = 0; i < this->newCap; i++)
 	{
@@ -195,7 +195,7 @@ void TileArr<T>::resizeClear(unsigned newCap)
 
 	this->cap = newCap;
 
-	this->tiles = new T*[this->cap];
+	this->tiles = new T * [this->cap];
 	this->nrOfTiles = 0;
 
 	this->initialize(0);

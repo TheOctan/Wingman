@@ -6,7 +6,7 @@ class dArr
 private:
 	unsigned cap;
 	unsigned nrOfEl;
-	T* *arr;
+	T** arr;
 
 	void initialize(unsigned from);
 	void expand();
@@ -30,7 +30,7 @@ dArr<T>::dArr(unsigned cap)
 	this->cap = cap;
 	this->nrOfEl = 0;
 
-	this->arr = new T*[this->cap];
+	this->arr = new T * [this->cap];
 
 	this->initialize(0);
 }
@@ -41,7 +41,7 @@ dArr<T>::dArr(const dArr& obj)
 	this->cap = obj.cap;
 	this->nrOfEl = obj.nrOfEl;
 
-	this->arr = new T*[this->cap];
+	this->arr = new T * [this->cap];
 
 	for (size_t i = 0; i < this->nrOfEl; i++)
 	{
@@ -82,7 +82,7 @@ void dArr<T>::operator = (const T& obj)
 	this->cap = obj.cap;
 	this->nrOfEl = obj.nrOfEl;
 
-	this->arr = new T*[this->cap];
+	this->arr = new T * [this->cap];
 
 	for (size_t i = 0; i < this->nrOfEl; i++)
 	{
@@ -106,14 +106,14 @@ void dArr<T>::expand()
 {
 	this->cap *= 2;
 
-	T* *tempArr = new T*[this->cap];
+	T** tempArr = new T * [this->cap];
 
 	for (size_t i = 0; i < this->nrOfEl; i++)
 	{
 		tempArr[i] = this->arr[i];
 	}
 
-	delete [] this->arr;
+	delete[] this->arr;
 
 	this->arr = tempArr;
 
