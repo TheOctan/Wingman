@@ -28,7 +28,7 @@ void EnemySpawner::updateTimer()
 
 }
 
-bool EnemySpawner::isInScreen(View &view)
+bool EnemySpawner::isInScreen(View& view)
 {
 	return true;
 }
@@ -49,12 +49,12 @@ std::string EnemySpawner::getAsString()const
 		std::to_string(this->nrOfEnemies) + " ";
 }
 
-void EnemySpawner::update(View &view)
+void EnemySpawner::update(View& view)
 {
 
 }
 
-void EnemySpawner::draw(RenderTarget &target, Font &font)
+void EnemySpawner::draw(RenderTarget& target, Font& font)
 {
 	RectangleShape shape;
 	shape.setFillColor(Color::White);
@@ -75,7 +75,7 @@ void EnemySpawner::draw(RenderTarget &target, Font &font)
 		"NrOfE: " + std::to_string(this->nrOfEnemies) + "\n"
 	);
 
-	
+
 	target.draw(shape);
 	target.draw(text);
 }

@@ -29,7 +29,7 @@ public:
 	inline const IntRect getTexRect()const { return this->sprite.getTextureRect(); }
 	inline const bool getIsDamaging()const { return this->isDamaging; }
 	inline const bool getIsCollider()const { return this->isCollider; }
-	inline void setPos(float x, float y) { this->sprite.setPosition(Vector2f(x,y)); }
+	inline void setPos(float x, float y) { this->sprite.setPosition(Vector2f(x, y)); }
 	inline void move(float x, float y) { this->sprite.move(x, y); }
 	inline void setTexRect(int x, int y, int width, int height) { this->sprite.setTextureRect(IntRect(x, y, width, height)); }
 	inline void setIsCollider(bool isCollider) { this->isCollider = isCollider; }
@@ -37,8 +37,8 @@ public:
 	inline void setColor(const Color color) { this->sprite.setColor(color); }
 	std::string getAsString()const;
 
-	void update(const float &dt);
-	void draw(RenderTarget &target);
+	void update(const float& dt);
+	void draw(RenderTarget& target);
 
 	//Static
 	static Texture textures;

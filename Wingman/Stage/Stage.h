@@ -36,21 +36,21 @@ public:
 	//Modifiers
 	void setBackground(const int index, const int width, const int height);
 	void setBackgroundSize(float width, float height);
-	
+
 	//Functions
 	void addTile(const Tile tile, unsigned row, unsigned col, int type);
 	void removeTile(unsigned row, unsigned col, bool background);
 	void addEnemySpawner(const EnemySpawner es, unsigned row, unsigned col);
 	void removeEnemySpawner(unsigned row, unsigned col);
-	void reset(View &view);
+	void reset(View& view);
 
 	void saveStage(std::string fileName);
-	bool loadStage(std::string fileName, View &view);
+	bool loadStage(std::string fileName, View& view);
 
-	void updateBackground(const float &dt, View &view);
-	void update(const float &dt, View &view, bool editor);
+	void updateBackground(const float& dt, View& view);
+	void update(const float& dt, View& view, bool editor);
 
-	void draw(RenderTarget &target, View &view, bool editor, Font &font);
+	void draw(RenderTarget& target, View& view, bool editor, Font& font);
 
 	//Static
 	static dArr<Texture> backgroundTextures;

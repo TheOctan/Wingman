@@ -20,7 +20,7 @@ void Stage::initTextures()
 	if (in.is_open())
 	{
 		while (std::getline(in, tempStr))
-		{ 
+		{
 			temp.loadFromFile(tempStr.c_str());
 			temp.setRepeated(true);
 			Stage::backgroundTextures.add(Texture(temp));
@@ -47,7 +47,7 @@ Stage::Stage(unsigned long sizeX, unsigned long sizeY)
 	this->toCol = 0;
 	this->fromRow = 0;
 	this->toRow = 0;
-	
+
 	this->scrollSpeed = 2.f;
 
 	for (unsigned i = 0; i < this->stageSizeX; i++) //Col
@@ -80,7 +80,7 @@ void Stage::addTile(const Tile tile, unsigned row, unsigned col, int type)
 		else
 			std::cout << "Aleady a tile in that position!" << "\n";
 	}
-	else if(type == tileType::backgroundTile)
+	else if (type == tileType::backgroundTile)
 	{
 		if (this->backgroundTiles[row].isNull(col))
 		{
@@ -131,16 +131,16 @@ void Stage::removeEnemySpawner(unsigned row, unsigned col)
 	if (!this->enemySpawners[row].isNull(col))
 		this->enemySpawners[row].remove(col);
 	else
-		std::cout << "No enemy spawner in that position!" << "\n";	
+		std::cout << "No enemy spawner in that position!" << "\n";
 }
 
-void Stage::reset(View &view)
+void Stage::reset(View& view)
 {
 	//Reset background
 	this->backgrounds.clear();
 	this->background.setPosition(
 		Vector2f(
-			view.getCenter().x - view.getSize().x / 2, 
+			view.getCenter().x - view.getSize().x / 2,
 			view.getCenter().y - view.getSize().y / 2
 		)
 	);
@@ -183,18 +183,18 @@ void Stage::saveStage(std::string fileName)
 		out << std::to_string(this->stageSizeY) << " ";
 
 		//Save background
-		out << this->backgroundIndex 
-			<< " " << static_cast<int>(this->background.getGlobalBounds().width) 
+		out << this->backgroundIndex
+			<< " " << static_cast<int>(this->background.getGlobalBounds().width)
 			<< " " << static_cast<int>(this->background.getGlobalBounds().height);
 
-		out << "\n"; 
+		out << "\n";
 
 		for (size_t i = 0; i < this->stageSizeX; i++)
 		{
 			//Regular tiles
 			for (size_t k = 0; k < this->stageSizeY; k++)
 			{
-				if(!this->tiles[i].isNull(k))
+				if (!this->tiles[i].isNull(k))
 					out << this->tiles[i][k].getAsString() << " ";
 			}
 		}
@@ -229,7 +229,7 @@ void Stage::saveStage(std::string fileName)
 	out.close();
 }
 
-bool Stage::loadStage(std::string fileName, View &view)
+bool Stage::loadStage(std::string fileName, View& view)
 {
 	std::ifstream in;
 	bool loadSuccess = false;
@@ -287,7 +287,7 @@ bool Stage::loadStage(std::string fileName, View &view)
 		this->tiles.resizeClear(this->stageSizeX);
 		this->backgroundTiles.resizeClear(this->stageSizeX);
 		this->enemySpawners.resizeClear(this->stageSizeX);
-		
+
 		for (size_t i = 0; i < this->stageSizeX; i++)
 		{
 			this->tiles.push(TileArr<Tile>(stageSizeY), i);
@@ -297,7 +297,7 @@ bool Stage::loadStage(std::string fileName, View &view)
 
 		line.clear();
 		ss.clear();
-		
+
 		//Load regular tiles
 
 		std::getline(in, line);
@@ -355,14 +355,14 @@ bool Stage::loadStage(std::string fileName, View &view)
 		ss.str(line);
 
 		while (
-			ss 
-			>> gridPosX 
+			ss
+			>> gridPosX
 			>> gridPosY
 			>> randomSpawnPos
 			>> maxVelocity
-			>> type 
+			>> type
 			>> levelInterval
-			>> nrOfEnemies 
+			>> nrOfEnemies
 			)
 		{
 			this->enemySpawners[gridPosX].push(
@@ -373,7 +373,7 @@ bool Stage::loadStage(std::string fileName, View &view)
 					type,
 					levelInterval,
 					nrOfEnemies
-					),
+				),
 				gridPosY
 			);
 		}
@@ -388,17 +388,17 @@ bool Stage::loadStage(std::string fileName, View &view)
 	return loadSuccess;
 }
 
-void Stage::updateBackground(const float &dt, View &view)
+void Stage::updateBackground(const float& dt, View& view)
 {
 	bool bgRemoved = false;
 	for (size_t i = 0; i < this->backgrounds.size() && !bgRemoved; i++)
 	{
 		this->backgrounds[i].move(this->scrollSpeed * dt * this->dtMultiplier * 0.8f, 0.f);
-		
+
 		//When Background top-right is less or equal to view left side
 		//Remove background
 		if (
-			this->backgrounds.size() < 3 
+			this->backgrounds.size() < 3
 			&& this->backgrounds[i].getPosition().x
 			+ this->backgrounds[i].getGlobalBounds().width
 			<=
@@ -406,12 +406,12 @@ void Stage::updateBackground(const float &dt, View &view)
 			)
 		{
 			this->background.setPosition(
-				this->backgrounds[i].getPosition().x 
-				+ this->backgrounds[i].getGlobalBounds().width, 
+				this->backgrounds[i].getPosition().x
+				+ this->backgrounds[i].getGlobalBounds().width,
 				this->background.getPosition().y);
 
 			this->backgrounds.add(background);
-		}	
+		}
 		else if (
 			this->backgrounds[i].getPosition().x
 			+ this->backgrounds[i].getGlobalBounds().width
@@ -424,7 +424,7 @@ void Stage::updateBackground(const float &dt, View &view)
 
 		if (bgRemoved)
 			this->backgrounds.remove(i);
-	}	
+	}
 }
 
 void Stage::setBackgroundSize(float width, float height)
@@ -439,7 +439,7 @@ void Stage::setBackgroundSize(float width, float height)
 	this->background.setSize(Vector2f(width, height));
 }
 
-void Stage::update(const float &dt, View &view, bool editor)
+void Stage::update(const float& dt, View& view, bool editor)
 {
 	//this->fromCol = (view.getCenter().x - view.getSize().x / 2) / Wingman::gridSize;
 	//if (fromCol <= 0)
@@ -484,14 +484,14 @@ void Stage::update(const float &dt, View &view, bool editor)
 	//	}
 	//}
 
-	if(!editor)
+	if (!editor)
 		this->updateBackground(dt, view);
 }
 
-void Stage::draw(RenderTarget &target, View &view, bool editor, Font &font)
+void Stage::draw(RenderTarget& target, View& view, bool editor, Font& font)
 {
 	//Index calculations
-	this->fromCol = (view.getCenter().x - view.getSize().x / 2)/Wingman::gridSize;
+	this->fromCol = (view.getCenter().x - view.getSize().x / 2) / Wingman::gridSize;
 	if (fromCol <= 0)
 		fromCol = 0;
 	if (fromCol >= this->stageSizeX)
@@ -552,7 +552,7 @@ void Stage::draw(RenderTarget &target, View &view, bool editor, Font &font)
 					shape.setOutlineColor(Color::Red);
 
 					target.draw(shape);
-					
+
 				}
 			}
 

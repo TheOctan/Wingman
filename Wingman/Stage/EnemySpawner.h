@@ -12,7 +12,7 @@ private:
 	int type; // -1 = random
 	int levelInterval;
 	int nrOfEnemies; // -1 = random ( 1 - 10 )
-	
+
 public:
 	EnemySpawner(
 		Vector2i gridPos,
@@ -41,11 +41,11 @@ public:
 
 	//Functions
 	void updateTimer();
-	bool isInScreen(View &view);
+	bool isInScreen(View& view);
 	void spawn();
 	std::string getAsString()const;
 
-	void update(View &view);
-	void draw(RenderTarget &target, Font &font);
+	void update(View& view);
+	void draw(RenderTarget& target, Font& font);
 };
 

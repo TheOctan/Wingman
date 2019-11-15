@@ -47,12 +47,12 @@ std::string Tile::getAsString()const
 		std::to_string(isDamaging) + " ";
 }
 
-void Tile::update(const float &dt)
+void Tile::update(const float& dt)
 {
 
 }
 
-void Tile::draw(RenderTarget &target)
+void Tile::draw(RenderTarget& target)
 {
 	target.draw(this->sprite);
 }
