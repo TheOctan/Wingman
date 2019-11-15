@@ -12,15 +12,15 @@ private:
 	bool idle;
 	bool hover;
 	bool pressed;
-	
+
 	Color colorIdle;
 	Color colorHover;
 	Color colorPressed;
-	
+
 public:
 	WButton(
 		int id,
-		Font &font,
+		Font& font,
 		std::string text,
 		const unsigned int charSize,
 		Vector2f pos,
@@ -36,7 +36,7 @@ public:
 	bool isIdle();
 
 	void update(Vector2f mousePos);
-	void draw(RenderTarget &target);
+	void draw(RenderTarget& target);
 
 	//Static
 	static dArr<Texture> textures;
