@@ -1,6 +1,6 @@
 #include "GameMapMaker.h"
 
-GameMapMaker::GameMapMaker(RenderWindow *window)
+GameMapMaker::GameMapMaker(RenderWindow* window)
 {
 	this->window = window;
 	this->window->setFramerateLimit(300);
@@ -60,8 +60,8 @@ void GameMapMaker::newStage()
 	unsigned mapSizeX = 0;
 	unsigned mapSizeY = 0;
 
- 	std::cout << "New Map" << "\n\n";
-	
+	std::cout << "New Map" << "\n\n";
+
 	std::cout << "Map name:";
 	std::getline(std::cin, this->stageName);
 	this->stageName.append(".wmap");
@@ -115,7 +115,7 @@ void GameMapMaker::saveStage()
 		std::cout << "File " << this->stageName << " already exists! Overwrite? (0) NO (1) YES) \n\n";
 
 		std::cout << "Choice: ";
-		
+
 		std::cin >> choice;
 
 		while (std::cin.fail() || choice > 1)
@@ -146,7 +146,7 @@ void GameMapMaker::saveStage()
 		this->stage->saveStage(this->stageName);
 		std::cout << "Stage " << this->stageName << " saved!" << "\n\n";
 	}
-	
+
 	in.close();
 }
 
@@ -174,9 +174,9 @@ void GameMapMaker::loadStage()
 void GameMapMaker::setBackground()
 {
 	int choice = 0;
-	
+
 	std::cout << "Background select" << "\n";
-	
+
 	std::cout << "Background index(" << "0 - " << Stage::nrOfBackgrounds << ")";
 	std::cin >> choice;
 
@@ -209,7 +209,7 @@ void GameMapMaker::setBackground()
 		std::cout << "Background Size X";
 		std::cin >> choice;
 	}
-	
+
 	this->backgroundWidth = choice;
 
 	std::cout << "Background Size Y";
@@ -236,7 +236,7 @@ void GameMapMaker::setBackground()
 void GameMapMaker::setEnemySpawner()
 {
 	std::cout << "SET ENEMY SPAWNER" << "\n\n";
-	
+
 	std::cout << "Random pos:";
 	std::cin >> this->enemyRandomSpawnPos;
 
@@ -263,7 +263,7 @@ void GameMapMaker::setEnemySpawner()
 		std::cin >> this->enemyMaxVelocity;
 	}
 
-	std::cout << "Type:"; 
+	std::cout << "Type:";
 	std::cin >> this->enemyType;
 
 	while (std::cin.fail() || this->enemyType > Enemy::nrOfTypes)
@@ -393,7 +393,7 @@ void GameMapMaker::updateMousePositions()
 {
 	this->mousePosWindow = Mouse::getPosition(*this->window);
 	this->mousePosWorld = this->window->mapPixelToCoords(this->mousePosWindow);
-	
+
 	if (windowUI)
 	{
 		this->mousePosGrid.x = this->mousePosWindow.x / (Wingman::gridSize + 1);
@@ -415,7 +415,7 @@ void GameMapMaker::updateMousePositions()
 
 }
 
-void GameMapMaker::updateView(const float &dt)
+void GameMapMaker::updateView(const float& dt)
 {
 	float speed = 0.f;
 	if (Keyboard::isKeyPressed(Keyboard::LShift))
@@ -429,9 +429,9 @@ void GameMapMaker::updateView(const float &dt)
 
 	if (Keyboard::isKeyPressed(Keyboard::W))
 	{
-		this->mainView.move(0.f, -speed * dt * this->dtMultiplier);		
+		this->mainView.move(0.f, -speed * dt * this->dtMultiplier);
 	}
-	else if(Keyboard::isKeyPressed(Keyboard::S))
+	else if (Keyboard::isKeyPressed(Keyboard::S))
 	{
 		this->mainView.move(0.f, speed * dt * this->dtMultiplier);
 	}
@@ -445,13 +445,13 @@ void GameMapMaker::updateView(const float &dt)
 	}
 }
 
-void GameMapMaker::updateTimers(const float &dt)
+void GameMapMaker::updateTimers(const float& dt)
 {
 	if (this->keyTime < this->keyTimeMax)
 		this->keyTime += 1.f * dt * this->dtMultiplier;
 }
 
-void GameMapMaker::mapUpdate(const float &dt)
+void GameMapMaker::mapUpdate(const float& dt)
 {
 	this->stage->update(dt, this->mainView, true);
 }
@@ -461,9 +461,9 @@ void GameMapMaker::updateControls()
 	//SWITCH WINDOW/VIEW UI
 	if (Keyboard::isKeyPressed(Keyboard::Tab) && this->keyTime >= this->keyTimeMax)
 	{
-		if(this->windowUI)
+		if (this->windowUI)
 			this->windowUI = false;
-		else 
+		else
 			this->windowUI = true;
 
 		std::cout << this->windowUI << "\n";
@@ -487,7 +487,7 @@ void GameMapMaker::updateControls()
 	}
 
 	//New map
-	if (Keyboard::isKeyPressed(Keyboard::N) 
+	if (Keyboard::isKeyPressed(Keyboard::N)
 		&& Keyboard::isKeyPressed(Keyboard::LControl)
 		&& this->keyTime >= this->keyTimeMax)
 	{
@@ -573,7 +573,7 @@ void GameMapMaker::updateControls()
 	}
 
 	//Save stage
-	if (Keyboard::isKeyPressed(Keyboard::LControl) 
+	if (Keyboard::isKeyPressed(Keyboard::LControl)
 		&& Keyboard::isKeyPressed(Keyboard::S)
 		&& this->keyTime >= this->keyTimeMax)
 	{
@@ -670,7 +670,7 @@ void GameMapMaker::updateText()
 
 	if (this->toolSelect == Stage::tileType::backgroundTile)
 		this->selectorText.setString(std::string("BACKGROUND TILE " + std::to_string(this->tileCollider)));
-	else if(this->toolSelect == Stage::tileType::regularTile)
+	else if (this->toolSelect == Stage::tileType::regularTile)
 		this->selectorText.setString(std::string("REGULAR TILE " + std::to_string(this->tileCollider)));
 	else if (this->toolSelect == Stage::tileType::enemySpawner)
 		this->selectorText.setString("ENEMY SPAWNER");
@@ -709,7 +709,7 @@ void GameMapMaker::updateUI()
 	}
 }
 
-void GameMapMaker::update(const float &dt)
+void GameMapMaker::update(const float& dt)
 {
 	//Timers UPDATE
 	this->updateTimers(dt);
@@ -750,7 +750,7 @@ void GameMapMaker::drawUIWindow()
 {
 	this->window->draw(this->textureSelector);
 
-	this->window->draw(this->selector);	
+	this->window->draw(this->selector);
 }
 
 void GameMapMaker::drawUIView()

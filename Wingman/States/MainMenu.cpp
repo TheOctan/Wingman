@@ -57,7 +57,7 @@ void MainMenu::initButtons()
 	);
 }
 
-void MainMenu::initialize(Vector2u &windowBounds)
+void MainMenu::initialize(Vector2u& windowBounds)
 {
 	//Init variables
 	this->font.loadFromFile("Fonts/Dosis-Light.ttf");
@@ -71,12 +71,12 @@ void MainMenu::initialize(Vector2u &windowBounds)
 }
 
 //Update
-void MainMenu::updateBackground(Vector2f &mPos, const float &dt)
+void MainMenu::updateBackground(Vector2f& mPos, const float& dt)
 {
 
 }
 
-void MainMenu::updateButtons(Vector2f &mPos, const float &dt)
+void MainMenu::updateButtons(Vector2f& mPos, const float& dt)
 {
 	for (size_t i = 0; i < this->buttons.size(); i++)
 	{
@@ -84,7 +84,7 @@ void MainMenu::updateButtons(Vector2f &mPos, const float &dt)
 	}
 }
 
-void MainMenu::update(Vector2f &mPos, const float &dt)
+void MainMenu::update(Vector2f& mPos, const float& dt)
 {
 	//Update background
 	this->updateBackground(mPos, dt);
@@ -94,12 +94,12 @@ void MainMenu::update(Vector2f &mPos, const float &dt)
 }
 
 //Draw
-void MainMenu::drawBackground(RenderTarget &target)
+void MainMenu::drawBackground(RenderTarget& target)
 {
 
 }
 
-void MainMenu::drawButtons(RenderTarget &target)
+void MainMenu::drawButtons(RenderTarget& target)
 {
 	for (size_t i = 0; i < this->buttons.size(); i++)
 	{
@@ -107,7 +107,7 @@ void MainMenu::drawButtons(RenderTarget &target)
 	}
 }
 
-void MainMenu::draw(RenderTarget &target)
+void MainMenu::draw(RenderTarget& target)
 {
 	//Draw the background
 	this->drawBackground(target);

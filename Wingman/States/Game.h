@@ -4,7 +4,7 @@
 #include"Boss.h"
 #include"Map.h"
 
-enum Mode {Survival = 0, Regular};
+enum Mode { Survival = 0, Regular };
 
 class Game
 {
@@ -13,7 +13,7 @@ private:
 	MainMenu mainMenu;
 
 	//Game
-	RenderWindow *window;
+	RenderWindow* window;
 	View mainView;
 	RenderTexture mainRenderTexture;
 	Sprite mainRenderSprite;
@@ -23,7 +23,7 @@ private:
 	float keyTime;
 	bool fullscreen;
 	int mode;
-	
+
 	//Score
 	unsigned score;
 	unsigned scoreMultiplier;
@@ -62,7 +62,7 @@ private:
 	//MAP
 	int fromCol, toCol;
 	int fromRow, toRow;
-	Stage *stage;
+	Stage* stage;
 
 	//Players
 	dArr<Player> players;
@@ -73,7 +73,7 @@ private:
 	std::vector<Enemy> enemiesSaved;
 	float enemySpawnTimer;
 	float enemySpawnTimerMax;
-	
+
 	//Bosses
 	bool bossEncounter;
 	dArr<Boss> bosses;
@@ -101,7 +101,7 @@ private:
 	//Boss Textures
 
 public:
-	Game(RenderWindow *window);
+	Game(RenderWindow* window);
 	virtual ~Game();
 
 	//Accessors
@@ -121,29 +121,29 @@ public:
 	void initMap();
 	void initialize();
 
-	void updateView(const float &dt);
+	void updateView(const float& dt);
 	void restartUpdate();
 	void setEndingScoreboard();
-	void updateTimers(const float &dt);
-	void updateTimersUnpaused(const float &dt);
+	void updateTimers(const float& dt);
+	void updateTimersUnpaused(const float& dt);
 	void updateScore();
 	void updateDifficulty();
 	void updateUIPlayer(int index);
 	void updateUIEnemy(int index);
-	void updateWhilePaused(const float &dt);
-	void playerUpdate(const float &dt);
-	void playerBulletUpdate(const float &dt, const int i);
-	void playerCollisionUpdate(const float &dt, const int i);
-	void enemyUpdate(const float &dt);
-	void enemySpawnUpdate(const float &dt);
-	void enemyBulletUpdate(const float &dt);
-	void textTagsUpdate(const float &dt);
-	void pickupsUpdate(const float &dt);
-	void upgradesUpdate(const float &dt);
-	void powerupsUpdate(const float &dt);
-	void mapUpdate(const float &dt);
-	void particlesUpdate(const float &dt);
-	void update(const float &dt);
+	void updateWhilePaused(const float& dt);
+	void playerUpdate(const float& dt);
+	void playerBulletUpdate(const float& dt, const int i);
+	void playerCollisionUpdate(const float& dt, const int i);
+	void enemyUpdate(const float& dt);
+	void enemySpawnUpdate(const float& dt);
+	void enemyBulletUpdate(const float& dt);
+	void textTagsUpdate(const float& dt);
+	void pickupsUpdate(const float& dt);
+	void upgradesUpdate(const float& dt);
+	void powerupsUpdate(const float& dt);
+	void mapUpdate(const float& dt);
+	void particlesUpdate(const float& dt);
+	void update(const float& dt);
 
 	void drawUI();
 	void drawPlayers();

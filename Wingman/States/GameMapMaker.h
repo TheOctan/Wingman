@@ -10,7 +10,7 @@ class GameMapMaker
 private:
 
 	//GameMapMaker
-	RenderWindow *window;
+	RenderWindow* window;
 	View mainView;
 	float dtMultiplier;
 	float keyTimeMax;
@@ -56,10 +56,10 @@ private:
 
 	//MAP
 	std::string stageName;
-	Stage *stage;
+	Stage* stage;
 
 public:
-	GameMapMaker(RenderWindow *window);
+	GameMapMaker(RenderWindow* window);
 	virtual ~GameMapMaker();
 
 	//Accessors
@@ -85,15 +85,15 @@ public:
 	void initialize();
 
 	void updateMousePositions();
-	void updateView(const float &dt);
-	void updateTimers(const float &dt);
-	void mapUpdate(const float &dt);
+	void updateView(const float& dt);
+	void updateTimers(const float& dt);
+	void mapUpdate(const float& dt);
 	void updateControls();
 	void updateAddRemoveTiles();
 	void updateText();
 	void updateButtons();
 	void updateUI();
-	void update(const float &dt);
+	void update(const float& dt);
 
 	void drawText();
 	void drawUIWindow();

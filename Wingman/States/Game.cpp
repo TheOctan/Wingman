@@ -1,6 +1,6 @@
 #include "Game.h"
 
-Game::Game(RenderWindow *window)
+Game::Game(RenderWindow* window)
 {
 	this->window = window;
 	this->window->setFramerateLimit(300);
@@ -140,7 +140,7 @@ void Game::initUI()
 	this->staticPlayerText.setFont(font);
 	this->staticPlayerText.setCharacterSize(14);
 	this->staticPlayerText.setColor(Color::White);
-	
+
 	//bars init
 	this->playerExpBar.setSize(Vector2f(90.f, 10.f));
 	this->playerExpBar.setFillColor(Color(0.f, 90.f, 200.f, 200.f));
@@ -160,10 +160,10 @@ void Game::initUI()
 	this->gameOverText.setFillColor(Color::Red);
 	this->gameOverText.setCharacterSize(40);
 	this->gameOverText.setString("GAME OVER!");
-	this->gameOverText.setPosition(this->window->getSize().x/2 - 100.f, this->window->getSize().y / 2);
+	this->gameOverText.setPosition(this->window->getSize().x / 2 - 100.f, this->window->getSize().y / 2);
 
 	this->scoreText.setFont(this->font);
-	this->scoreText.setFillColor(Color(200,200,200,150));
+	this->scoreText.setFillColor(Color(200, 200, 200, 150));
 	this->scoreText.setCharacterSize(32);
 	this->scoreText.setString("Score: 0");
 	this->scoreText.setPosition(10.f, 10.f);
@@ -252,7 +252,7 @@ void Game::initialize()
 	this->initUI();
 }
 
-void Game::updateView(const float &dt)
+void Game::updateView(const float& dt)
 {
 	this->mainView.move(this->stage->getScrollSpeed() * dt * this->dtMultiplier, 0.f);
 }
@@ -275,7 +275,7 @@ void Game::restartUpdate()
 		this->bossEncounter = false;
 		this->enemySpawnTimerMax = 35.f; //ALSO IN CONSTUCTOR!
 		this->scoreTimer.restart();
-		
+
 		//Reset stage
 		this->mainView.setCenter(Vector2f(
 			this->window->getSize().x / 2,
@@ -291,7 +291,7 @@ void Game::restartUpdate()
 		this->powerups.clear();
 		this->textTags.clear();
 		this->particles.clear();
-		
+
 	}
 }
 
@@ -305,13 +305,13 @@ void Game::setEndingScoreboard()
 	this->gameOverText.setString
 	(
 		std::string("GAME OVER\nScore: " +
-			std::to_string(this->score) +
-			"\n" +
-			"Time: " +
-			std::to_string(this->scoreTime) +
-			"\n" +
-			"Score/Second: " +
-			std::to_string((int)round((double)this->score / (double)this->scoreTime))) +
+					std::to_string(this->score) +
+					"\n" +
+					"Time: " +
+					std::to_string(this->scoreTime) +
+					"\n" +
+					"Score/Second: " +
+					std::to_string((int)round((double)this->score / (double)this->scoreTime))) +
 		"\nF1 to RESTART"
 	);
 
@@ -319,13 +319,13 @@ void Game::setEndingScoreboard()
 		this->bestScoreSecond = (double)this->score / (double)this->scoreTime;
 }
 
-void Game::updateTimers(const float &dt)
+void Game::updateTimers(const float& dt)
 {
 	if (this->keyTime < this->keyTimeMax)
 		this->keyTime += 1.f * dt * this->dtMultiplier;
 }
 
-void Game::updateTimersUnpaused(const float &dt)
+void Game::updateTimersUnpaused(const float& dt)
 {
 	//Enemy spawn timer
 	if (this->enemySpawnTimer < this->enemySpawnTimerMax)
@@ -361,7 +361,7 @@ void Game::updateDifficulty()
 {
 	if ((int)this->difficultyTimer % 1000 == 0)
 	{
-		if(this->enemySpawnTimerMax > 10)
+		if (this->enemySpawnTimerMax > 10)
 			this->enemySpawnTimerMax--;
 
 		this->difficulty++;
@@ -412,13 +412,13 @@ void Game::updateUIPlayer(int index)
 				1.f
 			);
 
-			if(static_cast<int>(this->players[index].getShieldRechargeTimer()) % 5 == 0)
+			if (static_cast<int>(this->players[index].getShieldRechargeTimer()) % 5 == 0)
 				this->playerShieldBar.setFillColor(Color::Red);
 			else
 				this->playerShieldBar.setFillColor(Color(200.f, 200.f, 200.f, 200.f));
 		}
 		else
-		{		
+		{
 			this->playerShieldBar.setScale(
 				(static_cast<float>(this->players[index].getShieldTimer()) / this->players[index].getShieldTimerMax()),
 				1.f
@@ -443,11 +443,11 @@ void Game::updateUIPlayer(int index)
 			this->playerStatsText.setString(this->players[index].getStatsAsString());
 
 			this->playerStatsTextBack.setPosition(
-				this->players[index].getPosition().x, 
+				this->players[index].getPosition().x,
 				this->players[index].getPosition().y + 150.f
 			);
 			this->playerStatsTextBack.setSize(Vector2f(this->playerStatsText.getGlobalBounds().width, this->playerStatsText.getGlobalBounds().height));
-			
+
 			this->playerStatsText.setPosition(this->playerStatsTextBack.getPosition());
 		}
 	}
@@ -467,7 +467,7 @@ void Game::updateUIEnemy(int index)
 		std::to_string(this->enemies[index].getHPMax()));
 }
 
-void Game::updateWhilePaused(const float &dt)
+void Game::updateWhilePaused(const float& dt)
 {
 	//Change accessories when paused
 	if (this->paused)
@@ -482,7 +482,7 @@ void Game::updateWhilePaused(const float &dt)
 	}
 }
 
-void Game::playerUpdate(const float &dt)
+void Game::playerUpdate(const float& dt)
 {
 	for (size_t i = 0; i < this->players.size(); i++)
 	{
@@ -490,8 +490,8 @@ void Game::playerUpdate(const float &dt)
 		{
 			//UPDATE PLAYERS
 			this->players[i].update(
-				this->mainView, 
-				dt, 
+				this->mainView,
+				dt,
 				stage->getScrollSpeed());
 
 			//Collision update
@@ -530,7 +530,7 @@ void Game::playerUpdate(const float &dt)
 	}
 }
 
-void Game::playerBulletUpdate(const float &dt, const int i)
+void Game::playerBulletUpdate(const float& dt, const int i)
 {
 	bool enemyRemoved = false;
 	bool bulletRemoved = false;
@@ -568,14 +568,14 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 					//Create text tag
 					this->textTags.add(
 						TextTag(&this->font,
-							"-" + std::to_string(damage),
-							Color::Red,
-							Vector2f(this->enemies[j].getPosition().x,
-								this->enemies[j].getPosition().y - 30.f),
-							Vector2f(1.f, 0.f),
-							28,
-							30.f,
-							true
+								"-" + std::to_string(damage),
+								Color::Red,
+								Vector2f(this->enemies[j].getPosition().x,
+										 this->enemies[j].getPosition().y - 30.f),
+								Vector2f(1.f, 0.f),
+								28,
+								30.f,
+								true
 						)
 					);
 				}
@@ -616,18 +616,18 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 						//GAIN EXP TAG
 						this->textTags.add(
 							TextTag(&this->font,
-								"+" +
-								std::to_string(exp) +
-								" ( x" +
-								std::to_string(this->scoreMultiplier) +
-								" x2 Powerup! ) " +
-								" EXP",
-								Color::Cyan,
-								this->enemies[j].getPosition(),
-								Vector2f(1.f, 0.f),
-								24,
-								40.f,
-								true
+									"+" +
+									std::to_string(exp) +
+									" ( x" +
+									std::to_string(this->scoreMultiplier) +
+									" x2 Powerup! ) " +
+									" EXP",
+									Color::Cyan,
+									this->enemies[j].getPosition(),
+									Vector2f(1.f, 0.f),
+									24,
+									40.f,
+									true
 							)
 						);
 					}
@@ -636,18 +636,18 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 						//GAIN EXP TAG
 						this->textTags.add(
 							TextTag(&this->font,
-								"+" +
-								std::to_string(exp) +
-								" ( x" +
-								std::to_string(this->scoreMultiplier) +
-								" ) " +
-								" EXP",
-								Color::Cyan,
-								this->enemies[j].getPosition(),
-								Vector2f(1.f, 0.f),
-								24,
-								40.f,
-								true
+									"+" +
+									std::to_string(exp) +
+									" ( x" +
+									std::to_string(this->scoreMultiplier) +
+									" ) " +
+									" EXP",
+									Color::Cyan,
+									this->enemies[j].getPosition(),
+									Vector2f(1.f, 0.f),
+									24,
+									40.f,
+									true
 							)
 						);
 					}
@@ -655,14 +655,14 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 					//SCORE TEXT TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"+ " + std::to_string(score) +
-							"	( x" + std::to_string(this->scoreMultiplier) + " )",
-							Color::White,
-							Vector2f(100.f, 10.f),
-							Vector2f(1.f, 0.f),
-							30,
-							40.f,
-							true
+								"+ " + std::to_string(score) +
+								"	( x" + std::to_string(this->scoreMultiplier) + " )",
+								Color::White,
+								Vector2f(100.f, 10.f),
+								Vector2f(1.f, 0.f),
+								30,
+								40.f,
+								true
 						)
 					);
 
@@ -671,14 +671,14 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 					{
 						this->textTags.add(
 							TextTag(&this->font,
-								"LEVEL UP!",
-								Color::Cyan,
-								Vector2f(this->players[i].getPosition().x + 20.f,
-									this->players[i].getPosition().y - 20.f),
-								Vector2f(0.f, 1.f),
-								32,
-								40.f,
-								true
+									"LEVEL UP!",
+									Color::Cyan,
+									Vector2f(this->players[i].getPosition().x + 20.f,
+											 this->players[i].getPosition().y - 20.f),
+									Vector2f(0.f, 1.f),
+									32,
+									40.f,
+									true
 							)
 						);
 					}
@@ -725,9 +725,9 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 							this->upgrades.add(
 								Upgrade
 								(
-								this->enemies[j].getPosition(),
-								uType,
-								500.f
+									this->enemies[j].getPosition(),
+									uType,
+									500.f
 								)
 							);
 						}
@@ -743,7 +743,7 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 						{
 							uType = rand() % Powerup::nrOfTextures;
 
-							this->powerups.add( 
+							this->powerups.add(
 								Powerup(
 									uType,
 									300.f,
@@ -758,8 +758,8 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 						std::cout << "ERROR NO DROP!" << "\n";
 						break;
 					}
-					
-					enemyRemoved = true;	
+
+					enemyRemoved = true;
 				}
 
 				//Piercning shot check/Remove bullet
@@ -771,7 +771,7 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 				{
 					this->players[i].getBullet(k).setPosition(
 						Vector2f(this->enemies[j].getPosition().x + this->enemies[j].getGlobalBounds().width + this->players[i].getBullet(k).getGlobalBounds().width / 2 + 1.f,
-							this->players[i].getBullet(k).getPosition().y)
+								 this->players[i].getBullet(k).getPosition().y)
 					);
 				}
 			}
@@ -781,22 +781,22 @@ void Game::playerBulletUpdate(const float &dt, const int i)
 		}
 
 		//Window bounds check
-		if (this->players[i].getBullet(k).getPosition().x > this->mainView.getCenter().x + this->mainView.getSize().x/2)
+		if (this->players[i].getBullet(k).getPosition().x > this->mainView.getCenter().x + this->mainView.getSize().x / 2)
 		{
-			bulletRemoved = true;		
+			bulletRemoved = true;
 		}
 
-		if(bulletRemoved)
+		if (bulletRemoved)
 			this->players[i].removeBullet(k);
 	}
 }
 
-void Game::playerCollisionUpdate(const float &dt, const int i)
+void Game::playerCollisionUpdate(const float& dt, const int i)
 {
 	//Index calculations
 	if (players[i].isAlive())
 	{
-		this->fromCol = (this->players[i].getPosition().x - Wingman::gridSize*2) / Wingman::gridSize;
+		this->fromCol = (this->players[i].getPosition().x - Wingman::gridSize * 2) / Wingman::gridSize;
 		if (fromCol <= 0)
 			fromCol = 0;
 		if (fromCol >= this->stage->getSizeX())
@@ -838,7 +838,7 @@ void Game::playerCollisionUpdate(const float &dt, const int i)
 	}
 }
 
-void Game::enemyUpdate(const float &dt)
+void Game::enemyUpdate(const float& dt)
 {
 	//Spawn enemies
 	this->enemySpawnUpdate(dt);
@@ -869,14 +869,14 @@ void Game::enemyUpdate(const float &dt)
 					//PLAYER TAKE DAMAGE TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"-" + std::to_string(damage),
-							Color::Red,
-							Vector2f(this->players[k].getPosition().x + 20.f,
-								this->players[k].getPosition().y - 20.f),
-							Vector2f(-1.f, 0.f),
-							30,
-							30.f,
-							true
+								"-" + std::to_string(damage),
+								Color::Red,
+								Vector2f(this->players[k].getPosition().x + 20.f,
+										 this->players[k].getPosition().y - 20.f),
+								Vector2f(-1.f, 0.f),
+								30,
+								30.f,
+								true
 						)
 					);
 
@@ -891,7 +891,7 @@ void Game::enemyUpdate(const float &dt)
 		}
 
 		//Enemies out of bounds
-		if (this->enemies[i].getPosition().x < this->mainView.getCenter().x - this->mainView.getSize().x/2 - this->enemies[i].getGlobalBounds().width)
+		if (this->enemies[i].getPosition().x < this->mainView.getCenter().x - this->mainView.getSize().x / 2 - this->enemies[i].getGlobalBounds().width)
 		{
 			enemyRemoved = true;
 		}
@@ -903,7 +903,7 @@ void Game::enemyUpdate(const float &dt)
 	this->enemyBulletUpdate(dt);
 }
 
-void Game::enemySpawnUpdate(const float &dt)
+void Game::enemySpawnUpdate(const float& dt)
 {
 	//Spawn enemies
 	if (this->mode == Mode::Survival)
@@ -950,16 +950,16 @@ void Game::enemySpawnUpdate(const float &dt)
 			toRow = 0;
 		if (toRow >= this->stage->getSizeY())
 			toRow = this->stage->getSizeY();
-		
+
 		for (size_t i = fromCol; i < toCol; i++)
 		{
 			for (size_t j = fromRow; j < toRow; j++)
 			{
-				if (!this->stage->getEnemySpawners()[i].isNull(j) 
+				if (!this->stage->getEnemySpawners()[i].isNull(j)
 					&& this->stage->getEnemySpawners()[i][j].getPos().x < this->mainView.getCenter().x + this->mainView.getSize().x / 2
 					&& !this->stage->getEnemySpawners()[i][j].isUsed()
 					)
-					
+
 				{
 					int eType = 0;
 					int nrOfE = 0;
@@ -977,7 +977,7 @@ void Game::enemySpawnUpdate(const float &dt)
 					}
 					else
 						nrOfE = this->stage->getEnemySpawners()[i][j].getNrOfEnemies();
-					
+
 					for (size_t k = 0; k < nrOfE; k++)
 					{
 						std::cout << eType << "\n" << this->players[(rand() % playersAlive)].getLevel() << "\n";
@@ -993,15 +993,15 @@ void Game::enemySpawnUpdate(const float &dt)
 						);
 
 						this->stage->getEnemySpawners()[i][j].setUsed();
-				
-					}	
+
+					}
 				}
 			}
 		}
-	}	
+	}
 }
 
-void Game::enemyBulletUpdate(const float &dt)
+void Game::enemyBulletUpdate(const float& dt)
 {
 	//Enemy bullet update
 	bool bulletRemoved = false;
@@ -1026,14 +1026,14 @@ void Game::enemyBulletUpdate(const float &dt)
 					//PLAYER TAKE DAMAGE TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"-" + std::to_string(damage),
-							Color::Red,
-							Vector2f(this->players[k].getPosition().x + 20.f,
-								this->players[k].getPosition().y - 20.f),
-							Vector2f(-1.f, 0.f),
-							30,
-							30.f,
-							true
+								"-" + std::to_string(damage),
+								Color::Red,
+								Vector2f(this->players[k].getPosition().x + 20.f,
+										 this->players[k].getPosition().y - 20.f),
+								Vector2f(-1.f, 0.f),
+								30,
+								30.f,
+								true
 						)
 					);
 
@@ -1061,14 +1061,14 @@ void Game::enemyBulletUpdate(const float &dt)
 					//PLAYER SHIELDED TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"-" + std::to_string(0),
-							Color::Cyan,
-							Vector2f(this->players[k].getPosition().x + 20.f,
-								this->players[k].getPosition().y - 20.f),
-							Vector2f(-1.f, 0.f),
-							30,
-							30.f,
-							true
+								"-" + std::to_string(0),
+								Color::Cyan,
+								Vector2f(this->players[k].getPosition().x + 20.f,
+										 this->players[k].getPosition().y - 20.f),
+								Vector2f(-1.f, 0.f),
+								30,
+								30.f,
+								true
 						)
 					);
 				}
@@ -1082,7 +1082,7 @@ void Game::enemyBulletUpdate(const float &dt)
 
 		//Window bounds check
 		if (!bulletRemoved
-			&& (Enemy::enemyBullets[i].getPosition().x > this->mainView.getCenter().x + this->mainView.getSize().x/2
+			&& (Enemy::enemyBullets[i].getPosition().x > this->mainView.getCenter().x + this->mainView.getSize().x / 2
 				|| Enemy::enemyBullets[i].getPosition().x < this->mainView.getCenter().x - this->mainView.getSize().x / 2
 				|| Enemy::enemyBullets[i].getPosition().y > this->mainView.getCenter().y + this->mainView.getSize().y / 2
 				|| Enemy::enemyBullets[i].getPosition().y < this->mainView.getCenter().y - this->mainView.getSize().y / 2
@@ -1096,7 +1096,7 @@ void Game::enemyBulletUpdate(const float &dt)
 	}
 }
 
-void Game::textTagsUpdate(const float &dt)
+void Game::textTagsUpdate(const float& dt)
 {
 	bool textTagRemoved = false;
 	for (size_t i = 0; i < this->textTags.size() && !textTagRemoved; i++)
@@ -1113,7 +1113,7 @@ void Game::textTagsUpdate(const float &dt)
 	}
 }
 
-void Game::pickupsUpdate(const float &dt)
+void Game::pickupsUpdate(const float& dt)
 {
 	bool pickupRemoved = false;
 	for (size_t i = 0; i < this->pickups.size() && !pickupRemoved; i++)
@@ -1137,15 +1137,15 @@ void Game::pickupsUpdate(const float &dt)
 						//GAIN HP TAG
 						this->textTags.add(
 							TextTag(&this->font,
-								"+" +
-								std::to_string(gainHp) +
-								" HP",
-								Color::Green,
-								Vector2f(this->players[k].getPosition()),
-								Vector2f(0.f, -1.f),
-								24,
-								40.f,
-								true
+									"+" +
+									std::to_string(gainHp) +
+									" HP",
+									Color::Green,
+									Vector2f(this->players[k].getPosition()),
+									Vector2f(0.f, -1.f),
+									24,
+									40.f,
+									true
 							)
 						);
 					}
@@ -1154,29 +1154,29 @@ void Game::pickupsUpdate(const float &dt)
 						//GAIN EXP TAG
 						this->textTags.add(
 							TextTag(&this->font,
-								"+" +
-								std::to_string(10) +
-								" EXP",
-								Color::Cyan,
-								this->pickups[i].getPosition(),
-								Vector2f(1.f, 0.f),
-								24,
-								40.f,
-								true
+									"+" +
+									std::to_string(10) +
+									" EXP",
+									Color::Cyan,
+									this->pickups[i].getPosition(),
+									Vector2f(1.f, 0.f),
+									24,
+									40.f,
+									true
 							)
 						);
 						if (this->players[k].gainExp(10))
 						{
 							this->textTags.add(
 								TextTag(&this->font,
-									"LEVEL UP!",
-									Color::Cyan,
-									Vector2f(this->players[i].getPosition().x + 20.f,
-										this->players[i].getPosition().y - 20.f),
-									Vector2f(0.f, 1.f),
-									32,
-									40.f,
-									true
+										"LEVEL UP!",
+										Color::Cyan,
+										Vector2f(this->players[i].getPosition().x + 20.f,
+												 this->players[i].getPosition().y - 20.f),
+										Vector2f(0.f, 1.f),
+										32,
+										40.f,
+										true
 								)
 							);
 						}
@@ -1209,7 +1209,7 @@ void Game::pickupsUpdate(const float &dt)
 	}
 }
 
-void Game::upgradesUpdate(const float &dt)
+void Game::upgradesUpdate(const float& dt)
 {
 	bool upgradeRemoved = false;
 	bool hasUpgrade = false;
@@ -1230,7 +1230,7 @@ void Game::upgradesUpdate(const float &dt)
 							hasUpgrade = true;
 					}
 
-					if(!hasUpgrade)
+					if (!hasUpgrade)
 						this->players[k].getAcquiredUpgrades().add(this->upgrades[i].getType());
 				}
 
@@ -1244,13 +1244,13 @@ void Game::upgradesUpdate(const float &dt)
 					//HT TEXT TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"RANDOM STATPOINT UPGRADE",
-							Color::Yellow,
-							this->players[k].getPosition(),
-							Vector2f(1.f, 0.f),
-							40,
-							100.f,
-							true
+								"RANDOM STATPOINT UPGRADE",
+								Color::Yellow,
+								this->players[k].getPosition(),
+								Vector2f(1.f, 0.f),
+								40,
+								100.f,
+								true
 						)
 					);
 
@@ -1262,13 +1262,13 @@ void Game::upgradesUpdate(const float &dt)
 					//HT TEXT TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"PERMANENT HEALTH UPGRADE",
-							Color::Yellow,
-							this->players[k].getPosition(),
-							Vector2f(1.f, 0.f),
-							40,
-							100.f,
-							true
+								"PERMANENT HEALTH UPGRADE",
+								Color::Yellow,
+								this->players[k].getPosition(),
+								Vector2f(1.f, 0.f),
+								40,
+								100.f,
+								true
 						)
 					);
 
@@ -1281,13 +1281,13 @@ void Game::upgradesUpdate(const float &dt)
 					//DR TEXT TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"DOUBLE RAY UPGRADE",
-							Color::Yellow,
-							this->players[k].getPosition(),
-							Vector2f(1.f, 0.f),
-							40,
-							100.f,
-							true
+								"DOUBLE RAY UPGRADE",
+								Color::Yellow,
+								this->players[k].getPosition(),
+								Vector2f(1.f, 0.f),
+								40,
+								100.f,
+								true
 						)
 					);
 
@@ -1300,13 +1300,13 @@ void Game::upgradesUpdate(const float &dt)
 					//TR TEXT TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"TRIPLE RAY UPGRADE",
-							Color::Yellow,
-							this->players[k].getPosition(),
-							Vector2f(1.f, 0.f),
-							40,
-							100.f,
-							true
+								"TRIPLE RAY UPGRADE",
+								Color::Yellow,
+								this->players[k].getPosition(),
+								Vector2f(1.f, 0.f),
+								40,
+								100.f,
+								true
 						)
 					);
 
@@ -1318,13 +1318,13 @@ void Game::upgradesUpdate(const float &dt)
 					//PS TEXT TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"PIERCING SHOT UPGRADE",
-							Color::Yellow,
-							this->players[k].getPosition(),
-							Vector2f(1.f, 0.f),
-							40,
-							100.f,
-							true
+								"PIERCING SHOT UPGRADE",
+								Color::Yellow,
+								this->players[k].getPosition(),
+								Vector2f(1.f, 0.f),
+								40,
+								100.f,
+								true
 						)
 					);
 
@@ -1336,13 +1336,13 @@ void Game::upgradesUpdate(const float &dt)
 					//SH TEXT TAG
 					this->textTags.add(
 						TextTag(&this->font,
-							"SHIELD UPGRADE",
-							Color::Yellow,
-							this->players[k].getPosition(),
-							Vector2f(1.f, 0.f),
-							40,
-							100.f,
-							true
+								"SHIELD UPGRADE",
+								Color::Yellow,
+								this->players[k].getPosition(),
+								Vector2f(1.f, 0.f),
+								40,
+								100.f,
+								true
 						)
 					);
 
@@ -1366,7 +1366,7 @@ void Game::upgradesUpdate(const float &dt)
 	}
 }
 
-void Game::powerupsUpdate(const float &dt)
+void Game::powerupsUpdate(const float& dt)
 {
 	bool powerupRemoved = false;
 	for (size_t i = 0; i < this->powerups.size(); i++)
@@ -1396,7 +1396,7 @@ void Game::powerupsUpdate(const float &dt)
 				powerupRemoved = true;
 			}
 		}
-		
+
 		if (this->powerups[i].canRemove())
 			powerupRemoved = true;
 
@@ -1405,12 +1405,12 @@ void Game::powerupsUpdate(const float &dt)
 	}
 }
 
-void Game::mapUpdate(const float &dt)
+void Game::mapUpdate(const float& dt)
 {
 	this->stage->update(dt, this->mainView, false);
 }
 
-void Game::particlesUpdate(const float &dt)
+void Game::particlesUpdate(const float& dt)
 {
 	bool particleRemoved = false;
 	for (size_t i = 0; i < this->particles.size() && !particleRemoved; i++)
@@ -1420,13 +1420,13 @@ void Game::particlesUpdate(const float &dt)
 		if (this->particles[i].readyToDel())
 			particleRemoved = true;
 
-		if(particleRemoved)
+		if (particleRemoved)
 			this->particles.remove(i);
 	}
 }
 
-void Game::update(const float &dt)
-{	
+void Game::update(const float& dt)
+{
 	//Timers UPDATE
 	this->updateTimers(dt);
 
@@ -1453,7 +1453,7 @@ void Game::update(const float &dt)
 
 		//Score timer and multipliers
 		this->updateScore();
-		
+
 		//Map update
 		this->mapUpdate(dt);
 
@@ -1481,11 +1481,11 @@ void Game::update(const float &dt)
 		//Restart
 		this->restartUpdate();
 	}
-	else if(this->playersAlive <= 0 && this->scoreTime == 0)
+	else if (this->playersAlive <= 0 && this->scoreTime == 0)
 	{
 		this->setEndingScoreboard(); //Best score is set
 	}
-	
+
 	//Restart if all players dead
 	if (this->playersAlive <= 0)
 	{
@@ -1555,7 +1555,7 @@ void Game::drawEnemies()
 void Game::drawMap()
 {
 	stage->draw(
-		*this->window, 
+		*this->window,
 		this->mainView,
 		false,
 		this->font
