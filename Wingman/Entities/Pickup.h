@@ -24,11 +24,11 @@ public:
 	inline const int& getType()const { return this->type; }
 	inline const bool canDelete()const { return this->aliveTimer >= this->aliveTimerMax; }
 	inline Vector2f getPosition() { return this->sprite.getPosition(); }
-	
+
 	bool checkCollision(FloatRect rect);
 
-	void Update(const float &dt);
-	void Draw(RenderTarget &target);
+	void Update(const float& dt);
+	void Draw(RenderTarget& target);
 
 	//Static varaibles
 	static dArr<Texture> textures;

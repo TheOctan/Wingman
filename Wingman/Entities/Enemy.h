@@ -36,10 +36,10 @@ public:
 	Enemy(
 		View& view,
 		bool randomPos,
-		Vector2f position, 
-		Vector2f direction, 
+		Vector2f position,
+		Vector2f direction,
 		float maxVelocity,
-		int type, 
+		int type,
 		int scalar,
 		int playerFollowNr);
 
@@ -57,8 +57,8 @@ public:
 	//Functions
 	void collision();
 	void takeDamage(int damage);
-	void Update(const float &dt, Vector2f playerPosition);
-	void Draw(RenderTarget &target);
+	void Update(const float& dt, Vector2f playerPosition);
+	void Draw(RenderTarget& target);
 
 	//Regular functions
 	float vectorLength(Vector2f v)
@@ -85,17 +85,21 @@ public:
 	static int nrOfTypes;
 
 	//CHANGE NR OF ENEMY TYPES AFTER ADDING!
-	enum eTypes { 
-		MOVELEFT = 0, 
+	enum eTypes
+	{
+		MOVELEFT = 0,
 		FOLLOW,
 		MOVELEFTSHOOT,
-		MOVELEFTSHOOTPLAYER, 
-		FOLLOWFAST, 
-		FOLLOWSHOOT, 
-		FOLLOWFASTSHOOT };
-	
-	enum weapons { 
-		REGULAR = 0, 
-		MISSILE };
+		MOVELEFTSHOOTPLAYER,
+		FOLLOWFAST,
+		FOLLOWSHOOT,
+		FOLLOWFASTSHOOT
+	};
+
+	enum weapons
+	{
+		REGULAR = 0,
+		MISSILE
+	};
 };
 

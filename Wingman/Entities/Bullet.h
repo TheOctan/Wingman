@@ -19,10 +19,10 @@ private:
 
 public:
 	Bullet(int type,
-		Vector2f position, Vector2f scale,
-		Vector2f direction, float initialVelocity,
-		float maxVelocity, float acceleration,
-		int damage);
+		   Vector2f position, Vector2f scale,
+		   Vector2f direction, float initialVelocity,
+		   float maxVelocity, float acceleration,
+		   int damage);
 	virtual ~Bullet();
 
 	//Accessors
@@ -34,10 +34,10 @@ public:
 	inline int getDamage()const { return this->damage; }
 
 	//Functions
-	void Movement(const float &dt);
+	void Movement(const float& dt);
 
-	void Update(const float &dt);
-	void Draw(RenderTarget &target);
+	void Update(const float& dt);
+	void Draw(RenderTarget& target);
 
 	//Regular functions
 	float vectorLength(Vector2f v)
@@ -54,11 +54,12 @@ public:
 	}
 
 	//Static
-	enum bullets { 
-		LASER_RED = 0, 
-		MISSILE_LIGHT_RIGHT, 
-		MISSILE_HEAVY_RIGHT, 
-		BULLET_CIRCULAR_RED 
+	enum bullets
+	{
+		LASER_RED = 0,
+		MISSILE_LIGHT_RIGHT,
+		MISSILE_HEAVY_RIGHT,
+		BULLET_CIRCULAR_RED
 	};
 
 	static dArr<Texture> textures;

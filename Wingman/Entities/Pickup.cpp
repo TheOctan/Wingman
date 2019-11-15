@@ -13,7 +13,7 @@ void Pickup::initTextures()
 	Pickup::textures.add(Texture(temp));
 	temp.loadFromFile("Textures/Pickups/missileHSupply.png");
 	Pickup::textures.add(Texture(temp));
-	
+
 	Pickup::nrOfTextures = Pickup::textures.size();
 }
 
@@ -29,7 +29,7 @@ Pickup::Pickup(
 		this->sprite.setTexture(Pickup::textures[this->type]);
 	else
 		std::cout << "ERROR! NO TEXTURE FOR THIS TYPE! PICKUP." << "\n";
-	
+
 	this->sprite.setOrigin(
 		this->sprite.getGlobalBounds().width / 2,
 		this->sprite.getGlobalBounds().height / 2
@@ -38,7 +38,7 @@ Pickup::Pickup(
 	this->sprite.setPosition(position);
 
 	this->sprite.setColor(Color(255, 255, 255, 200));
-	
+
 	this->aliveTimerMax = duration;
 	this->aliveTimer = 0;
 }
@@ -56,7 +56,7 @@ bool Pickup::checkCollision(FloatRect rect)
 	return false;
 }
 
-void Pickup::Update(const float &dt)
+void Pickup::Update(const float& dt)
 {
 	if (this->aliveTimer < this->aliveTimerMax)
 		this->aliveTimer += 1.f * dt * this->dtMultiplier;
@@ -64,7 +64,7 @@ void Pickup::Update(const float &dt)
 	this->sprite.rotate(5.f * dt * this->dtMultiplier);
 }
 
-void Pickup::Draw(RenderTarget &target)
+void Pickup::Draw(RenderTarget& target)
 {
 	target.draw(this->sprite);
 }

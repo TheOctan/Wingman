@@ -90,9 +90,9 @@ private:
 
 public:
 	Player(
-		int UP = Keyboard::W, 
+		int UP = Keyboard::W,
 		int DOWN = Keyboard::S,
-		int LEFT = Keyboard::A, 
+		int LEFT = Keyboard::A,
 		int RIGHT = Keyboard::D,
 		int SHOOT = Keyboard::Space,
 		int SHIELD = Keyboard::RAlt,
@@ -108,14 +108,14 @@ public:
 	Bullet& getBullet(unsigned index);
 	void removeBullet(unsigned index);
 	inline const int getBulletsSize()const { return this->bullets.size(); }
-	
+
 	inline Vector2f getPosition()const { return this->sprite.getPosition(); }
 	inline void resetVelocity() { this->currentVelocity = Vector2f(0.f, 0.f); }
 	inline void move(float x, float y) { this->sprite.move(x, y); this->mainGunSprite.move(x, y); }
 	inline const Vector2f& getNormDir()const { return this->normDir; }
 	inline FloatRect getBounds()const { return this->sprite.getGlobalBounds(); }
 	void setPos(float x, float y);
-	
+
 	inline const bool intersects(FloatRect rect)const { return this->sprite.getGlobalBounds().intersects(rect); }
 
 	inline const String getHpAsString()const { return std::to_string(this->hp) + "/" + std::to_string(this->hpMax); }
@@ -130,7 +130,7 @@ public:
 	inline bool isShielding()const { return this->shielding; }
 
 	inline const int& getPlayerNr()const { return this->playerNr; }
-	
+
 	inline const int& getLevel()const { return this->level; }
 	inline const int& getExp()const { return this->exp; }
 	inline const int& getExpNext()const { return this->expNext; }
@@ -139,10 +139,10 @@ public:
 	void addStatPointRandom();
 	bool playerShowStatsIsPressed();
 	std::string getStatsAsString()const;
-	
+
 	inline void gainScore(int score) { this->score += score; }
 	inline const int getScore()const { return this->score; }
-	
+
 	inline bool isDamageCooldown()const { return this->damageTimer < this->damageTimerMax; }
 	inline float getShieldTimer()const { return this->shieldTimer; }
 	inline float getShieldTimerMax()const { return this->shieldTimerMax; }
@@ -169,13 +169,13 @@ public:
 	void reset();
 	bool updateLeveling();
 	void updateStats();
-	void changeAccessories(const float &dt);
-	void updateAccessories(const float &dt, const float scrollSpeed);
+	void changeAccessories(const float& dt);
+	void updateAccessories(const float& dt, const float scrollSpeed);
 	void updatePowerups();
-	void combat(const float &dt);
-	void movement(View &view, const float &dtconst, float scrollSpeed);
-	void update(View &view, const float &dt, const float scrollSpeed);
-	void draw(RenderTarget &target);
+	void combat(const float& dt);
+	void movement(View& view, const float& dtconst, float scrollSpeed);
+	void update(View& view, const float& dt, const float scrollSpeed);
+	void draw(RenderTarget& target);
 
 	//Regular functions
 	float vectorLength(Vector2f v)
@@ -205,7 +205,7 @@ public:
 
 	static void initTextures();
 
-	enum weapons {LASER_NORMAL = 0, MISSILE_LIGHT, MISSILE_HEAVY };
+	enum weapons { LASER_NORMAL = 0, MISSILE_LIGHT, MISSILE_HEAVY };
 	enum controls { UP = 0, DOWN, LEFT, RIGHT, SHOOT, SHIELD, STATS, CHANGE_LWING, CHANGE_CPIT, CHANGE_RWING, CHANGE_AURA };
 };
 

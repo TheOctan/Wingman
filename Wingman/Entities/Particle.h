@@ -26,12 +26,12 @@ public:
 		Color color
 	);
 
-	~Particle(); 
+	~Particle();
 
 	inline bool readyToDel()const { return this->lifeTime <= 0.f; }
 
-	void update(const float &dt);
-	void draw(RenderTarget &target);
+	void update(const float& dt);
+	void draw(RenderTarget& target);
 
 	//Regular functions
 	float vectorLength(Vector2f v)
@@ -53,8 +53,9 @@ public:
 
 	static void initTextures();
 
-	enum particles { 
-		TRIANGULAR = 0 
+	enum particles
+	{
+		TRIANGULAR = 0
 	};
 
 };

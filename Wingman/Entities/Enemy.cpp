@@ -9,7 +9,7 @@ int Enemy::nrOfTextures;
 void Enemy::initTextures()
 {
 	Texture temp;
-	
+
 	temp.loadFromFile("Textures/enemyMoveLeft.png");
 	Enemy::textures.add(Texture(temp));
 	temp.loadFromFile("Textures/enemyFollow.png");
@@ -27,7 +27,7 @@ int Enemy::nrOfTypes = 4;
 Enemy::Enemy(
 	View& view,
 	bool randomPos,
-	Vector2f position, 
+	Vector2f position,
 	Vector2f moveDirection,
 	float maxVelocity,
 	int type,
@@ -48,7 +48,7 @@ Enemy::Enemy(
 		this->sprite.getGlobalBounds().width / 2,
 		this->sprite.getGlobalBounds().height / 2
 	);
-	
+
 	this->color = Color::White;
 	this->damageColor = Color::Red;
 
@@ -65,7 +65,7 @@ Enemy::Enemy(
 	{
 	case MOVELEFT:
 		this->sprite.setScale(Vector2f(0.11f, 0.11f));
-		this->hpMax = (rand()% 5 + 1) * scalar;
+		this->hpMax = (rand() % 5 + 1) * scalar;
 		this->hp = this->hpMax;
 		this->damageMax = (rand() % 3 + 1) * scalar;
 		this->damageMin = (rand() % 1 + 1) * scalar;
@@ -73,7 +73,7 @@ Enemy::Enemy(
 			this->maxVelocity = rand() % 20 + 5;
 		else
 			this->maxVelocity = maxVelocity;
-			break;
+		break;
 
 	case FOLLOW:
 		this->sprite.setScale(Vector2f(0.08f, 0.08f));
@@ -85,7 +85,7 @@ Enemy::Enemy(
 			this->maxVelocity = rand() % 6 + 3;
 		else
 			this->maxVelocity = maxVelocity;
-			break;
+		break;
 
 	case MOVELEFTSHOOT:
 		this->color = Color(150, 150, 170, 255);
@@ -94,12 +94,12 @@ Enemy::Enemy(
 		this->hp = this->hpMax;
 		this->damageMax = (rand() % 3 + 1) * scalar;
 		this->damageMin = (rand() % 1 + 1) * scalar;
-		
+
 		if (maxVelocity < 0)
 			this->maxVelocity = rand() % 10 + 5;
 		else
 			this->maxVelocity = maxVelocity;
-		
+
 		this->nrOfBullets = 3;
 		this->shootTimerMax = 8.f;
 		this->shootTimer = 0.f;
@@ -111,12 +111,12 @@ Enemy::Enemy(
 		this->hp = this->hpMax;
 		this->damageMax = (rand() % 2 + 1) * scalar;
 		this->damageMin = (rand() % 1 + 1) * scalar;
-		
+
 		if (maxVelocity < 0)
 			this->maxVelocity = rand() % 10 + 3;
 		else
 			this->maxVelocity = maxVelocity;
-		
+
 		this->shootTimerMax = 50.f;
 		this->shootTimer = 0.f;
 		break;
@@ -130,7 +130,7 @@ Enemy::Enemy(
 			this->maxVelocity = rand() % 6 + 3;
 		else
 			this->maxVelocity = maxVelocity;
-			break;
+		break;
 	}
 
 	this->hpMax = hpMax;
@@ -172,7 +172,7 @@ void Enemy::takeDamage(int damage)
 	}
 }
 
-void Enemy::Update(const float &dt, Vector2f playerPosition)
+void Enemy::Update(const float& dt, Vector2f playerPosition)
 {
 	switch (this->type)
 	{
@@ -199,7 +199,7 @@ void Enemy::Update(const float &dt, Vector2f playerPosition)
 
 		if (this->normalizedMoveDir.y > 0.3)
 			this->normalizedMoveDir.y = 0.3;
-		else if(this->normalizedMoveDir.y < -0.3)
+		else if (this->normalizedMoveDir.y < -0.3)
 			this->normalizedMoveDir.y = -0.3;
 
 		if (this->normalizedMoveDir.x > -0.7)
@@ -212,7 +212,7 @@ void Enemy::Update(const float &dt, Vector2f playerPosition)
 			this->normalizedMoveDir.y * this->maxVelocity * dt * this->dtMultiplier
 		);
 
-			break;
+		break;
 
 	case MOVELEFTSHOOT:
 
@@ -236,7 +236,7 @@ void Enemy::Update(const float &dt, Vector2f playerPosition)
 					Vector2f(0.2f, 0.2f),
 					this->normalizedMoveDir,
 					this->maxVelocity,
-					this->maxVelocity+5,
+					this->maxVelocity + 5,
 					0.2f,
 					this->getDamage()
 				)
@@ -246,7 +246,7 @@ void Enemy::Update(const float &dt, Vector2f playerPosition)
 			this->nrOfBullets--;
 		}
 
-			break;
+		break;
 
 	case MOVELEFTSHOOTPLAYER:
 
@@ -276,7 +276,7 @@ void Enemy::Update(const float &dt, Vector2f playerPosition)
 					this->sprite.getPosition(),
 					Vector2f(0.2f, 0.2f),
 					this->normalizedLookDir,
-					1.f, 
+					1.f,
 					5,
 					0.2f,
 					this->getDamage()
@@ -309,7 +309,7 @@ void Enemy::Update(const float &dt, Vector2f playerPosition)
 		this->sprite.setColor(color);
 }
 
-void Enemy::Draw(RenderTarget &target)
+void Enemy::Draw(RenderTarget& target)
 {
 	target.draw(this->sprite);
 }

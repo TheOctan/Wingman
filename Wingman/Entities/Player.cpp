@@ -104,8 +104,8 @@ Player::Player(
 	int CHANGE_AURA)
 
 	:level(1), exp(0),
-	hp(10), hpMax(10),hpAdded(10),
-	statPoints(0), cooling(0), 
+	hp(10), hpMax(10), hpAdded(10),
+	statPoints(0), cooling(0),
 	plating(0), wiring(0), power(0),
 	damage(1), damageMax(2),
 	score(0)
@@ -124,9 +124,9 @@ Player::Player(
 	//Stats
 	this->expNext = 20 + static_cast<int>(
 		(50 / 3)
-		*((pow(level, 3) - 6 
-			* pow(level, 2)) + 17 
-			* level - 12)
+		* ((pow(level, 3) - 6
+			* pow(level, 2)) + 17
+		   * level - 12)
 		);
 
 	//Textures & Sprites
@@ -159,9 +159,9 @@ Player::Player(
 	//Init shield
 	this->deflectorShield.setTexture(Player::shieldTextures[0]);
 	this->deflectorShield.setOrigin(
-		this->deflectorShield.getGlobalBounds().width/2,
-		this->deflectorShield.getGlobalBounds().height/2
-		);
+		this->deflectorShield.getGlobalBounds().width / 2,
+		this->deflectorShield.getGlobalBounds().height / 2
+	);
 	this->deflectorShield.setPosition(this->playerCenter);
 	this->deflectorShield.setScale(0.8f, 0.8f);
 
@@ -184,7 +184,7 @@ Player::Player(
 	this->lWing.setOrigin(
 		this->lWing.getGlobalBounds().width / 2,
 		this->lWing.getGlobalBounds().height / 2
-		);
+	);
 
 	this->lWing.setPosition(this->playerCenter);
 	this->lWing.setRotation(90.f);
@@ -202,7 +202,7 @@ Player::Player(
 	this->cPit.setOrigin(
 		this->cPit.getGlobalBounds().width / 2,
 		this->cPit.getGlobalBounds().height / 2
-		);
+	);
 
 	this->cPit.setPosition(this->playerCenter);
 	this->cPit.setRotation(90.f);
@@ -211,7 +211,7 @@ Player::Player(
 	this->aura.setOrigin(
 		this->aura.getGlobalBounds().width / 2,
 		this->aura.getGlobalBounds().height / 2
-		);
+	);
 
 	this->aura.setPosition(this->playerCenter);
 	this->aura.setRotation(90.f);
@@ -284,7 +284,7 @@ void Player::setPos(float x, float y)
 }
 
 int Player::getDamage()const
-{ 
+{
 	int damage = 0;
 
 	switch (this->currentWeapon)
@@ -317,13 +317,13 @@ int Player::getDamage()const
 }
 
 void Player::takeDamage(int damage)
-{ 
-	this->hp -= damage; 
+{
+	this->hp -= damage;
 
 	this->damageTimer = 0;
 
-	this->currentVelocity.x += -this->normDir.x*10.f;
-	this->currentVelocity.y += -this->normDir.y*10.f;
+	this->currentVelocity.x += -this->normDir.x * 10.f;
+	this->currentVelocity.y += -this->normDir.y * 10.f;
 }
 
 bool Player::updateLeveling()
@@ -333,7 +333,7 @@ bool Player::updateLeveling()
 		this->level++;
 		this->statPoints++;
 		this->exp -= this->expNext;
-		this->expNext = static_cast<int>((50 / 3)*((pow(level, 3) - 6 * pow(level, 2)) + 17 * level - 12));
+		this->expNext = static_cast<int>((50 / 3) * ((pow(level, 3) - 6 * pow(level, 2)) + 17 * level - 12));
 
 		this->wiring++;
 		this->cooling++;
@@ -358,7 +358,7 @@ void Player::updateStats()
 	this->shieldTimerMax = 50.f + this->cooling + (this->wiring / 2);
 }
 
-void Player::changeAccessories(const float &dt)
+void Player::changeAccessories(const float& dt)
 {
 	if (this->keyTime < this->keyTimeMax)
 		this->keyTime += 1.f * dt * this->dtMultiplier;
@@ -412,7 +412,7 @@ void Player::changeAccessories(const float &dt)
 	}
 }
 
-void Player::updateAccessories(const float &dt, const float scrollSpeed)
+void Player::updateAccessories(const float& dt, const float scrollSpeed)
 {
 	//Set the position of gun to follow player
 	this->mainGunSprite.setPosition(
@@ -427,8 +427,8 @@ void Player::updateAccessories(const float &dt, const float scrollSpeed)
 	if (this->mainGunSprite.getPosition().x < this->playerCenter.x + 20.f)
 	{
 		this->mainGunSprite.move(
-			scrollSpeed * dt * this->dtMultiplier + 
-			5.f * dt * this->dtMultiplier 
+			scrollSpeed * dt * this->dtMultiplier +
+			5.f * dt * this->dtMultiplier
 			+ this->currentVelocity.x * dt * this->dtMultiplier, 0.f);
 	}
 	if (this->mainGunSprite.getPosition().x > this->playerCenter.x + 20.f)
@@ -441,19 +441,19 @@ void Player::updateAccessories(const float &dt, const float scrollSpeed)
 
 	//Left wing
 	this->lWing.setPosition(
-		playerCenter.x + -abs(this->currentVelocity.x), 
-		playerCenter.y + -abs(this->currentVelocity.x/2 + this->currentVelocity.y/2)
+		playerCenter.x + -abs(this->currentVelocity.x),
+		playerCenter.y + -abs(this->currentVelocity.x / 2 + this->currentVelocity.y / 2)
 	);
 
 	//Right wing
 	this->rWing.setPosition(
-		playerCenter.x + -abs(this->currentVelocity.x), 
+		playerCenter.x + -abs(this->currentVelocity.x),
 		playerCenter.y + abs(this->currentVelocity.x / 2 + this->currentVelocity.y / 2)
 	);
 
 	//Cockpit
 	this->cPit.setPosition(
-		playerCenter.x + this->currentVelocity.x, 
+		playerCenter.x + this->currentVelocity.x,
 		playerCenter.y
 	);
 
@@ -471,7 +471,7 @@ void Player::updatePowerups()
 	}
 }
 
-void Player::movement(View &view, const float &dt, const float scrollSpeed)
+void Player::movement(View& view, const float& dt, const float scrollSpeed)
 {
 	//Update normalized direction
 	this->normDir = normalize(this->currentVelocity, vectorLength(this->currentVelocity));
@@ -481,15 +481,15 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 	{
 		this->direction.x = 0.f;
 		this->direction.y = -1.f;
-	
+
 		if (this->currentVelocity.y > -this->maxVelocity && this->direction.y < 0)
 			this->currentVelocity.y += this->direction.y * this->acceleration
 			* dt * this->dtMultiplier;
 	}
-	
+
 	//DOWN
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::DOWN])))
-	{ 
+	{
 		this->direction.x = 0.f;
 		this->direction.y = 1.f;
 
@@ -497,10 +497,10 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 			this->currentVelocity.y += this->direction.y * this->acceleration
 			* dt * this->dtMultiplier;
 	}
-	
+
 	//LEFT
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::LEFT])))
-	{ 
+	{
 		this->direction.x = -1.f;
 		this->direction.y = 0.f;
 
@@ -509,10 +509,10 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 			* dt * this->dtMultiplier;
 
 	}
-	
+
 	//RIGHT
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::RIGHT])))
-	{ 
+	{
 		this->direction.x = 1.f;
 		this->direction.y = 0.f;
 
@@ -559,7 +559,7 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 	//Final move
 	this->sprite.move(
 		scrollSpeed * dt * this->dtMultiplier +
-		this->currentVelocity.x * dt * this->dtMultiplier, 
+		this->currentVelocity.x * dt * this->dtMultiplier,
 		this->currentVelocity.y * dt * this->dtMultiplier);
 
 	//Update positions
@@ -570,7 +570,7 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 
 	//Window collision
 	//Left
-	if (this->getPosition().x <= view.getCenter().x - view.getSize().x/2)
+	if (this->getPosition().x <= view.getCenter().x - view.getSize().x / 2)
 	{
 		this->sprite.setPosition(view.getCenter().x - view.getSize().x / 2 + 10.f, this->sprite.getPosition().y);
 		this->currentVelocity.x = 0.f;
@@ -580,7 +580,7 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 	{
 		this->sprite.setPosition(view.getCenter().x + view.getSize().x / 2 - this->getBounds().width, this->sprite.getPosition().y);
 		this->currentVelocity.x = 0.f;
-	}	
+	}
 	//Top
 	if (this->getPosition().y <= view.getCenter().y - view.getSize().y / 2)
 	{
@@ -592,10 +592,10 @@ void Player::movement(View &view, const float &dt, const float scrollSpeed)
 	{
 		this->sprite.setPosition(this->sprite.getPosition().x, view.getCenter().y + view.getSize().y / 2 - this->getBounds().height);
 		this->currentVelocity.y = 0.f;
-	}	
+	}
 }
 
-void Player::combat(const float &dt)
+void Player::combat(const float& dt)
 {
 	if (Keyboard::isKeyPressed(Keyboard::Key(this->controls[controls::SHOOT]))
 		&& this->shootTimer >= this->shootTimerMax)
@@ -611,9 +611,9 @@ void Player::combat(const float &dt)
 						Vector2f(this->playerCenter.x + 100.f, this->playerCenter.y),
 						Vector2f(0.15f, 0.15f),
 						Vector2f(1.f, 0.f),
-						20.f, 
-						60.f, 
-						5.f, 
+						20.f,
+						60.f,
+						5.f,
 						this->getDamage()
 					));
 			}
@@ -625,8 +625,8 @@ void Player::combat(const float &dt)
 						Vector2f(this->playerCenter.x + 100.f, this->playerCenter.y - 15.f),
 						Vector2f(0.2f, 0.2f),
 						Vector2f(1.f, 0.f),
-						20.f, 
-						60.f, 
+						20.f,
+						60.f,
 						5.f,
 						this->getDamage()
 					)
@@ -638,8 +638,8 @@ void Player::combat(const float &dt)
 						Vector2f(this->playerCenter.x + 100.f, this->playerCenter.y + 15.f),
 						Vector2f(0.2f, 0.2f),
 						Vector2f(1.f, 0.f),
-						20.f, 
-						60.f, 
+						20.f,
+						60.f,
 						5.f,
 						this->getDamage()
 					)
@@ -653,7 +653,7 @@ void Player::combat(const float &dt)
 						Vector2f(this->playerCenter.x + 100.f, this->playerCenter.y - 41.f),
 						Vector2f(0.2f, 0.2f),
 						Vector2f(1.f, 0.f),
-						20.f, 
+						20.f,
 						60.f,
 						5.f,
 						this->getDamage()
@@ -666,8 +666,8 @@ void Player::combat(const float &dt)
 						Vector2f(this->playerCenter.x + 100.f, this->playerCenter.y),
 						Vector2f(0.2f, 0.2f),
 						Vector2f(1.f, 0.f),
-						20.f, 
-						60.f, 
+						20.f,
+						60.f,
 						5.f,
 						this->getDamage()
 					)
@@ -679,8 +679,8 @@ void Player::combat(const float &dt)
 						Vector2f(this->playerCenter.x + 100.f, this->playerCenter.y + 43.f),
 						Vector2f(0.2f, 0.2f),
 						Vector2f(1.f, 0.f),
-						20.f, 
-						60.f, 
+						20.f,
+						60.f,
 						5.f,
 						this->getDamage()
 					)
@@ -698,7 +698,7 @@ void Player::combat(const float &dt)
 					Bullet::MISSILE_LIGHT_RIGHT,
 					Vector2f(this->playerCenter.x, this->playerCenter.y - 25.f),
 					Vector2f(0.05f, 0.05f),
-					Vector2f(1.f, 0.f), 
+					Vector2f(1.f, 0.f),
 					0.f,
 					50.f,
 					1.f,
@@ -714,7 +714,7 @@ void Player::combat(const float &dt)
 						Vector2f(this->playerCenter.x, this->playerCenter.y + 25.f),
 						Vector2f(0.05f, 0.05f),
 						Vector2f(1.f, 0.f),
-						0.f, 
+						0.f,
 						50.f,
 						1.f,
 						this->getDamage()
@@ -726,10 +726,10 @@ void Player::combat(const float &dt)
 		{
 			if (this->dualMissiles02)
 			{
-				
+
 			}
 		}
-	
+
 		this->shootTimer = 0; //RESET TIMER!
 	}
 
@@ -793,9 +793,9 @@ void Player::removeBullet(unsigned index)
 	this->bullets.remove(index);
 }
 
-void Player::setGunLevel(int gunLevel) 
-{ 
-	this->mainGunLevel = gunLevel; 
+void Player::setGunLevel(int gunLevel)
+{
+	this->mainGunLevel = gunLevel;
 
 	if (this->mainGunLevel < Player::mainGunTextures.size())
 		this->mainGunSprite.setTexture(Player::mainGunTextures[this->mainGunLevel]);
@@ -840,11 +840,11 @@ void Player::gainHP(int hp)
 		this->hp = this->hpMax;
 }
 
-void Player:: upgradeHP() 
-{ 
-	this->hpAdded += 10; 
-	this->updateStats(); 
-	this->hp = this->hpMax; 
+void Player:: upgradeHP()
+{
+	this->hpAdded += 10;
+	this->updateStats();
+	this->hp = this->hpMax;
 }
 
 bool Player::playerShowStatsIsPressed()
@@ -921,7 +921,7 @@ void Player::reset()
 	this->shieldRechargeTimer = this->shieldRechargeTimerMax;
 }
 
-void Player::update(View &view, const float &dt, const float scrollSpeed)
+void Player::update(View& view, const float& dt, const float scrollSpeed)
 {
 	//Update timers
 	if (this->powerupRF)
@@ -940,12 +940,12 @@ void Player::update(View &view, const float &dt, const float scrollSpeed)
 	if (this->damageTimer < this->damageTimerMax)
 		this->damageTimer += 1.f * dt * this->dtMultiplier;
 
-	if(this->shieldRechargeTimer < this->shieldRechargeTimerMax)
+	if (this->shieldRechargeTimer < this->shieldRechargeTimerMax)
 		this->shieldRechargeTimer += 1.f * dt * this->dtMultiplier;
 
-	if (this->shieldTimer < this->shieldTimerMax 
+	if (this->shieldTimer < this->shieldTimerMax
 		&& this->shieldRechargeTimer >= this->shieldRechargeTimerMax)
-			this->shieldTimer += 1.f * dt * this->dtMultiplier;
+		this->shieldTimer += 1.f * dt * this->dtMultiplier;
 
 	if (this->powerupTimer > 0.f)
 		this->powerupTimer -= 1.f * dt * this->dtMultiplier;
@@ -957,7 +957,7 @@ void Player::update(View &view, const float &dt, const float scrollSpeed)
 	this->combat(dt);
 }
 
-void Player::draw(RenderTarget &target)
+void Player::draw(RenderTarget& target)
 {
 	target.draw(this->aura);
 

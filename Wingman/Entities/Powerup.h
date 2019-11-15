@@ -2,7 +2,7 @@
 
 #include"EnemySpawner.h"
 
-enum powerupTypes {RF = 0, XP2};
+enum powerupTypes { RF = 0, XP2 };
 
 class Powerup
 {
@@ -28,8 +28,8 @@ public:
 	inline bool canRemove()const { return this->timer <= 0.f; }
 
 	//Functions
-	void update(const float &dt);
-	void draw(RenderTarget &target);
+	void update(const float& dt);
+	void draw(RenderTarget& target);
 
 	//Static
 	static int nrOfTextures;
@@ -37,8 +37,9 @@ public:
 
 	static void initTextures();
 
-	enum powerups { 
-		RAPIDFIRE = 0, 
+	enum powerups
+	{
+		RAPIDFIRE = 0,
 		EXPERIENCE_DOUBLE
 	};
 };

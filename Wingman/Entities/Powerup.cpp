@@ -26,11 +26,11 @@ Powerup::Powerup(int type, float timerMax, Vector2f pos)
 		std::cout << "ERROR NO SUCH POWERUP TEXTURE OR TYPE! CONSTRUTOR POWERUP" << "\n\n";
 	else
 		this->sprite.setTexture(Powerup::textures[this->type]);
-	
+
 	this->sprite.setOrigin(
 		this->sprite.getGlobalBounds().width / 2,
 		this->sprite.getGlobalBounds().height / 2
-		);
+	);
 	this->sprite.setScale(1.f, 1.f);
 	this->sprite.setPosition(pos);
 }
@@ -40,7 +40,7 @@ Powerup::~Powerup()
 
 }
 
-void Powerup::update(const float &dt)
+void Powerup::update(const float& dt)
 {
 	//Update timer
 	if (this->timer > 0)
@@ -49,7 +49,7 @@ void Powerup::update(const float &dt)
 	this->sprite.rotate(5.f * dt * this->dtMultiplier);
 }
 
-void Powerup::draw(RenderTarget &target)
+void Powerup::draw(RenderTarget& target)
 {
 	target.draw(this->sprite);
 }

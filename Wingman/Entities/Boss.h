@@ -7,7 +7,7 @@ using namespace sf;
 class Boss
 {
 private:
-	
+
 	class BossGun
 	{
 	private:
@@ -19,13 +19,13 @@ private:
 		float shootTimer;
 
 	public:
-		BossGun(Texture *texture, 
-			Vector2f position, 
-			float shootTimerMax)
+		BossGun(Texture* texture,
+				Vector2f position,
+				float shootTimerMax)
 		{
 			this->shootTimerMax = shootTimerMax;
 			this->shootTimer = this->shootTimerMax;
-			
+
 
 			this->gunSprite.setTexture(*texture);
 			this->gunSprite.setPosition(position);
@@ -35,25 +35,25 @@ private:
 
 		}
 
-		void Update(const float &dt)
+		void Update(const float& dt)
 		{
 
 		}
 
-		void Draw(RenderTarget &target)
+		void Draw(RenderTarget& target)
 		{
 			target.draw(this->gunSprite);
 		}
 	};
-	
+
 	float dtMultiplier;
 
 	int type;
 	int nrOfGuns;
 
-	dArr<Texture> *bodyTextures;
-	dArr<Texture> *gunTextures;
-	dArr<Texture> *bulletTextures;
+	dArr<Texture>* bodyTextures;
+	dArr<Texture>* gunTextures;
+	dArr<Texture>* bulletTextures;
 	Sprite sprite;
 	dArr<BossGun> guns;
 	dArr<Bullet> bullets;
@@ -65,15 +65,15 @@ private:
 	int hp;
 
 public:
-	Boss(dArr<Texture> &bodyTextures,
-		dArr<Texture> &gunTextures,
-		dArr<Texture> &bulletTextures,
-		Vector2f position,
-		int type);
+	Boss(dArr<Texture>& bodyTextures,
+		 dArr<Texture>& gunTextures,
+		 dArr<Texture>& bulletTextures,
+		 Vector2f position,
+		 int type);
 	virtual ~Boss();
 
 	void Movement();
-	void Update(const float &dt);
-	void Draw(RenderTarget &target);
+	void Update(const float& dt);
+	void Draw(RenderTarget& target);
 };
 

@@ -18,7 +18,7 @@ private:
 	float dtMultiplier;
 
 	int type;
-	
+
 	float aliveTimerMax;
 	float aliveTimer;
 
@@ -31,14 +31,14 @@ public:
 		float aliveTimerMax);
 
 	virtual ~Upgrade();
-	
+
 	inline const int& getType()const { return this->type; }
 	inline bool canDelete() { return this->aliveTimer >= this->aliveTimerMax; }
-	
+
 	bool checkCollision(FloatRect rect);
 
-	void Update(const float &dt);
-	void Draw(RenderTarget &target);
+	void Update(const float& dt);
+	void Draw(RenderTarget& target);
 
 	//Static
 	static int nrOfTextures;
@@ -46,7 +46,8 @@ public:
 
 	static void initTextures();
 
-	enum upgrades { 
+	enum upgrades
+	{
 		STAT_POINT = 0,
 		HEALTH_TANK,
 		DOUBLE_RAY,

@@ -29,7 +29,7 @@ Particle::Particle(
 	this->sprite.setOrigin(
 		this->sprite.getGlobalBounds().width / 2,
 		this->sprite.getGlobalBounds().height / 2
-		);
+	);
 	this->sprite.setPosition(pos);
 	this->sprite.setScale(Vector2f(1, 1));
 	this->sprite.setColor(color);
@@ -56,7 +56,7 @@ Particle::~Particle()
 
 }
 
-void Particle::update(const float &dt)
+void Particle::update(const float& dt)
 {
 	//Lifetime
 	double lifeTimePercent = 0.f;
@@ -67,10 +67,10 @@ void Particle::update(const float &dt)
 		lifeTimePercent = static_cast<double>(this->lifeTime / this->lifeTimeMax);
 
 		//Reduce alpha
-		if(this->sprite.getColor().a > 0)	
+		if (this->sprite.getColor().a > 0)
 		{
 			this->sprite.setColor(Color(
-				this->color.r, 
+				this->color.r,
 				this->color.g,
 				this->color.b,
 				this->sprite.getColor().a)
@@ -92,13 +92,13 @@ void Particle::update(const float &dt)
 		this->sprite.move(
 			this->currentVel.x * dt * this->dtMultiplier,
 			this->currentVel.y * dt * this->dtMultiplier
-			);
+		);
 
 		this->sprite.rotate(this->maxRotation * dt * this->dtMultiplier);
 	}
 }
 
-void Particle::draw(RenderTarget &target)
+void Particle::draw(RenderTarget& target)
 {
 	target.draw(this->sprite);
 }
