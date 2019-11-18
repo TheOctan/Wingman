@@ -169,6 +169,8 @@
     <ClCompile Include="Stage\Wingman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\Framerate.h" />
+    <ClInclude Include="Engine\types.h" />
     <ClInclude Include="Entities\Boss.h" />
     <ClInclude Include="Entities\Bullet.h" />
     <ClInclude Include="Entities\Enemy.h" />

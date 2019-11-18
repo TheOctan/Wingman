@@ -160,7 +160,7 @@ void GameMapMaker::loadStage()
 	std::getline(std::cin, fileName);
 	fileName.append(".wmap");
 
-	if (this->stage->loadStage(fileName, this->mainView))
+	if (this->stage->loadStage("levels/" + fileName, this->mainView))
 	{
 		this->stageName = fileName;
 		std::cout << fileName << " Loaded!" << "\n\n";
