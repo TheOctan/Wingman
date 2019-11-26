@@ -7,12 +7,12 @@ namespace oct
 	public:
 		virtual ~State() = default;
 
-		virtual void init()		= 0;
-		virtual void start()	= 0;
-		virtual void resume()	= 0;
-		virtual void pause()	= 0;
-		virtual void stop()		= 0;
-		virtual void restart()	= 0;
-		virtual void destroy()	= 0;
+		virtual void onCreate()		= 0;
+		virtual void onStart()		= 0;
+		virtual void onResume()		= 0;
+		virtual void onPause()		= 0;
+		virtual void onStop()		= 0;
+		virtual void onRestart()	= 0;
+		virtual void onDestroy()	= 0;
 	};
 }

@@ -40,13 +40,13 @@ namespace oct
 		virtual void renderUpdate() {}
 		virtual void renderPostUpdate() {}
 
-		virtual void init() {}
-		virtual void start() {}
-		virtual void resume() {}
-		virtual void pause() {}		
-		virtual void stop() {}
-		virtual void restart() {}
-		virtual void destroy() {}
+		virtual void onCreate() {}
+		virtual void onStart() {}
+		virtual void onResume() {}
+		virtual void onPause() {}		
+		virtual void onStop() {}
+		virtual void onRestart() {}
+		virtual void onDestroy() {}
 
 	protected:
 		void requestStackPush(States::ID stateID);
