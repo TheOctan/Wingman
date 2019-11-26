@@ -22,22 +22,25 @@ namespace oct
 
 		struct Context
 		{
-			Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts);
+			Context(
+				sf::RenderWindow&	window,
+				TextureHolder&		textures,
+				FontHolder&			fonts);
 
-			sf::RenderWindow* window;
-			TextureHolder* textures;
-			FontHolder* fonts;
+			sf::RenderWindow*	window;
+			TextureHolder*		textures;
+			FontHolder*			fonts;
 		};
 
 	public:
 		ComponentState(StateStack* stack, Context context);
 		virtual ~ComponentState() = default;
 
-		virtual bool handleEvent(const sf::Event& event) {}
+		virtual bool handleEvent(const sf::Event& event) { return true; }
 
-		virtual bool preUpdate() {}
-		virtual bool update(sf::Time dt) {}
-		virtual bool postUpdate() {}
+		virtual bool preUpdate() { return true; }
+		virtual bool update(sf::Time dt) { return true; }
+		virtual bool postUpdate() { return true; }
 
 		virtual void renderPreUpdate() {}
 		virtual void renderUpdate() {}
@@ -59,7 +62,7 @@ namespace oct
 		Context getBaseContext() const;
 
 	private:
-		StateStack* stack;
+		StateStack*		stack;
 		Context			context;
 	};
 }

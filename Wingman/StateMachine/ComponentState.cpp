@@ -3,9 +3,9 @@
 namespace oct
 {
 	ComponentState::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts)
-	:	window(&window),
+	:	window	(&window),
 		textures(&textures),
-		fonts(&fonts)
+		fonts	(&fonts)
 	{
 	}
 
