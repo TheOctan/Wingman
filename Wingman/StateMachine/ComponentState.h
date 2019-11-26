@@ -3,23 +3,38 @@
 // #include <SFML/Graphics.hpp>
 #include "Object.h"
 #include "State.h"
-#include "Activity.h"
+#include "StateActivity.h"
+#include "StateStack.h"
+#include "Adapters/StateIdentifiers.h"
+
+#include <memory>
 
 namespace oct
 {
-	class ComponentState : public Object, public Activity, public State
+	class ComponentState : public Object, public StateActivity, public State
 	{
 		OCT_OBJECT(ComponentState, Object);
 
 	public:
-		ComponentState();
-		virtual ~ComponentState();
+		typedef std::unique_ptr<ComponentState> Ptr;
+		typedef StateStack<States::ID>	StateStack;
 
-		virtual void handleEvent(sf::Event event) {}
+		struct Context
+		{
+			Context(sf::RenderWindow& window);
 
-		virtual void preUpdate() {}
-		virtual void update(sf::Time dt) {}
-		virtual void postUpdate() {}
+			sf::RenderWindow* window;
+		};
+
+	public:
+		ComponentState(StateStack* stack, Context context);
+		virtual ~ComponentState() = default;
+
+		virtual bool handleEvent(const sf::Event& event) {}
+
+		virtual bool preUpdate() {}
+		virtual bool update(sf::Time dt) {}
+		virtual bool postUpdate() {}
 
 		virtual void renderPreUpdate() {}
 		virtual void renderUpdate() {}
@@ -32,5 +47,16 @@ namespace oct
 		virtual void stop() {}
 		virtual void restart() {}
 		virtual void destroy() {}
+
+	protected:
+		void requestStackPush(States::ID stateID);
+		void requestStackPop();
+		void requestStateClear();
+
+		Context getBaseContext() const;
+
+	private:
+		StateStack*		stack;
+		Context			context;
 	};
 }
