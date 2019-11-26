@@ -6,6 +6,7 @@
 #include "StateActivity.h"
 #include "StateStack.h"
 #include "Adapters/StateIdentifiers.h"
+#include "Resource/ResourceIdentifiers.h"
 
 #include <memory>
 
@@ -21,9 +22,11 @@ namespace oct
 
 		struct Context
 		{
-			Context(sf::RenderWindow& window);
+			Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts);
 
 			sf::RenderWindow* window;
+			TextureHolder* textures;
+			FontHolder* fonts;
 		};
 
 	public:
@@ -43,7 +46,7 @@ namespace oct
 		virtual void onCreate() {}
 		virtual void onStart() {}
 		virtual void onResume() {}
-		virtual void onPause() {}		
+		virtual void onPause() {}
 		virtual void onStop() {}
 		virtual void onRestart() {}
 		virtual void onDestroy() {}
@@ -56,7 +59,7 @@ namespace oct
 		Context getBaseContext() const;
 
 	private:
-		StateStack*		stack;
+		StateStack* stack;
 		Context			context;
 	};
 }

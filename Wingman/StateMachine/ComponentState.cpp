@@ -2,8 +2,10 @@
 
 namespace oct
 {
-	ComponentState::Context::Context(sf::RenderWindow& window)
-	:	window(&window)
+	ComponentState::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts)
+	:	window(&window),
+		textures(&textures),
+		fonts(&fonts)
 	{
 	}
 
