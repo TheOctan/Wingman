@@ -2,7 +2,7 @@
 
 #include "StateStack.h"
 #include "StateActivity.h"
-#include "ComponentState.h"
+#include "StateComponent.h"
 #include "Adapters/StateIdentifiers.h"
 
 #include <SFML/System/NonCopyable.hpp>
@@ -32,7 +32,7 @@ namespace oct
 		};
 
 	public:
-		explicit			StateMachine(ComponentState::Context context);
+		explicit			StateMachine(StateComponent::Context context);
 
 		template <typename T, typename... Param>
 		void				registerState(States::ID stateID, Param... arg);
@@ -54,7 +54,7 @@ namespace oct
 		bool				isempty();
 
 	private:
-		ComponentState::Ptr	createState(States::ID stateID);
+		StateComponent::Ptr	createState(States::ID stateID);
 		void				applyPendingChanges();
 
 	private:
@@ -67,11 +67,11 @@ namespace oct
 		};
 
 	private:
-		std::vector<ComponentState::Ptr>							mStack;
+		std::vector<StateComponent::Ptr>							mStack;
 		std::vector<PendingChange>									mPendingList;
 
-		ComponentState::Context										mContext;
-		std::map<States::ID, std::function<ComponentState::Ptr()>>	mFactories;
+		StateComponent::Context										mContext;
+		std::map<States::ID, std::function<StateComponent::Ptr()>>	mFactories;
 	};
 
 	template<typename T, typename... Param>
@@ -79,7 +79,7 @@ namespace oct
 	{
 		mFactories[stateID] = [this, arg...]()
 		{
-			return ComponentState::Ptr(new T(this, mContext, arg...));
+			return StateComponent::Ptr(new T(this, mContext, arg...));
 		};
 	}
 }

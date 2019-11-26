@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Wingman\include;$(SolutionDir)\Wingman\Entities;$(SolutionDir)\Wingman\GUI;$(SolutionDir)\Wingman\Stage;$(SolutionDir)\Wingman\StateMachine\States;$(SolutionDir)\Wingman\Util;$(SolutionDir)\Wingman\Engine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Wingman\include;$(SolutionDir)\Wingman\Entities;$(SolutionDir)\Wingman\GUI;$(SolutionDir)\Wingman\Stage;$(SolutionDir)\Wingman\Util;$(SolutionDir)\Wingman\Engine;$(SolutionDir)\Wingman\StateMachine;$(SolutionDir)\Wingman\StateMachine\States;$(SolutionDir)\Wingman\App</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,7 +119,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Wingman\include;$(SolutionDir)\Wingman\Entities;$(SolutionDir)\Wingman\GUI;$(SolutionDir)\Wingman\Stage;$(SolutionDir)\Wingman\StateMachine\States;$(SolutionDir)\Wingman\Util;$(SolutionDir)\Wingman\Engine</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Wingman\include;$(SolutionDir)\Wingman\Entities;$(SolutionDir)\Wingman\GUI;$(SolutionDir)\Wingman\Stage;$(SolutionDir)\Wingman\Util;$(SolutionDir)\Wingman\Engine;$(SolutionDir)\Wingman\StateMachine;$(SolutionDir)\Wingman\StateMachine\States;$(SolutionDir)\Wingman\App</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,13 +148,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App\Application.cpp" />
     <ClCompile Include="Engine\Object.cpp" />
     <ClCompile Include="Entities\Boss.cpp" />
     <ClCompile Include="Entities\Bullet.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Stage\EnemySpawner.cpp" />
+    <ClCompile Include="StateMachine\StateComponent.cpp" />
     <ClCompile Include="StateMachine\StateMachine.cpp" />
-    <ClCompile Include="StateMachine\ComponentState.cpp" />
     <ClCompile Include="StateMachine\States\Game.cpp" />
     <ClCompile Include="StateMachine\States\GameMapMaker.cpp" />
     <ClCompile Include="main.cpp" />
@@ -172,6 +173,9 @@
     <ClCompile Include="Stage\Wingman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App\Application.h" />
+    <ClInclude Include="App\Resource\ResourceHolder.hpp" />
+    <ClInclude Include="App\Resource\ResourceIdentifiers.h" />
     <ClInclude Include="Engine\Framerate.h" />
     <ClInclude Include="Engine\Object.h" />
     <ClInclude Include="Engine\types.h" />
@@ -179,10 +183,10 @@
     <ClInclude Include="Entities\Bullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Stage\EnemySpawner.h" />
+    <ClInclude Include="StateMachine\StateComponent.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
     <ClInclude Include="StateMachine\StateActivity.h" />
     <ClInclude Include="StateMachine\Adapters\StateIdentifiers.h" />
-    <ClInclude Include="StateMachine\ComponentState.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateStack.h" />
     <ClInclude Include="StateMachine\States\Game.h" />
@@ -201,6 +205,9 @@
     <ClInclude Include="Entities\Upgrade.h" />
     <ClInclude Include="GUI\WButton.h" />
     <ClInclude Include="Stage\Wingman.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App\Resource\ResourceHolder.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

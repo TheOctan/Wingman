@@ -12,12 +12,12 @@
 
 namespace oct
 {
-	class ComponentState : public Object, public StateActivity, public State
+	class StateComponent : public Object, public StateActivity, public State
 	{
-		OCT_OBJECT(ComponentState, Object);
+		OCT_OBJECT(StateComponent, Object);
 
 	public:
-		typedef std::unique_ptr<ComponentState> Ptr;
+		typedef std::unique_ptr<StateComponent> Ptr;
 		typedef StateStack<States::ID>	StateStack;
 
 		struct Context
@@ -33,8 +33,8 @@ namespace oct
 		};
 
 	public:
-		ComponentState(StateStack* stack, Context context);
-		virtual ~ComponentState() = default;
+		StateComponent(StateStack* stack, Context context);
+		virtual ~StateComponent() = default;
 
 		virtual bool handleEvent(const sf::Event& event) { return true; }
 

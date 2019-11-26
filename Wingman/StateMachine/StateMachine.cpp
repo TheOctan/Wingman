@@ -4,7 +4,7 @@
 
 namespace oct
 {
-	StateMachine::StateMachine(ComponentState::Context context)
+	StateMachine::StateMachine(StateComponent::Context context)
 	:	mStack		(),
 		mFactories	(),
 		mPendingList(),
@@ -55,7 +55,7 @@ namespace oct
 	void StateMachine::renderUpdate()
 	{
 		// Draw all active states from bottom to top
-		for (ComponentState::Ptr& state : mStack)
+		for (StateComponent::Ptr& state : mStack)
 			state->renderUpdate();
 	}
 
@@ -83,7 +83,7 @@ namespace oct
 		return mStack.empty();
 	}
 
-	ComponentState::Ptr StateMachine::createState(States::ID stateID)
+	StateComponent::Ptr StateMachine::createState(States::ID stateID)
 	{
 		auto found = mFactories.find(stateID);
 		assert(found != mFactories.end());
@@ -110,7 +110,7 @@ namespace oct
 				break;
 
 			case Clear:
-				for (ComponentState::Ptr& state : mStack)
+				for (StateComponent::Ptr& state : mStack)
 					state->onDestroy();
 
 				mStack.clear();
