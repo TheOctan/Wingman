@@ -1,8 +1,11 @@
 #pragma once
 
+#include "Core.h"
+#include "Activity.h"
+
 namespace oct
 {
-	class State
+	class State : public Activity
 	{
 	public:
 		virtual ~State() = default;
@@ -15,4 +18,6 @@ namespace oct
 		virtual void onRestart()	= 0;
 		virtual void onDestroy()	= 0;
 	};
+
+	using StateRef = Ref<State>;
 }

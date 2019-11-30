@@ -1,25 +1,23 @@
 #pragma once
 
 // #include <SFML/Graphics.hpp>
+#include "Core.h"
 #include "Object.h"
 #include "State.h"
-#include "StateActivity.h"
+#include "Activity.h"
 #include "StateStack.h"
-#include "Adapters/StateIdentifiers.h"
 #include "Resource/ResourceIdentifiers.h"
+#include "Adapters/StateIdentifiers.h"
 
-#include <memory>
+#include <SFML/Graphics.hpp>
 
 namespace oct
 {
-	class StateComponent : public Object, public StateActivity, public State
+	class StateComponent : public State, public Object, sf::NonCopyable
 	{
 		OCT_OBJECT(StateComponent, Object);
 
 	public:
-		typedef std::unique_ptr<StateComponent> Ptr;
-		typedef StateStack<States::ID>	StateStack;
-
 		struct Context
 		{
 			Context(
@@ -65,4 +63,6 @@ namespace oct
 		StateStack*		stack;
 		Context			context;
 	};
+
+	using StateComponentRef = Ref<StateComponent>;
 }

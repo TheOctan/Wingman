@@ -1,13 +1,16 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "Core.h"
+
+#include <SFML/System/Time.hpp>
+#include <SFML/Window/Event.hpp>
 
 namespace oct
 {
-	class StateActivity
+	class Activity
 	{
 	public:
-		virtual ~StateActivity() = default;
+		virtual ~Activity() = default;
 
 		virtual bool handleEvent(const sf::Event& event) = 0;
 
@@ -19,4 +22,6 @@ namespace oct
 		virtual void renderUpdate()			= 0;
 		virtual void renderPostUpdate()		= 0;
 	};
+
+	using ActivityRef = Ref<Activity>;
 }
