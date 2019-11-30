@@ -12,55 +12,15 @@ namespace oct
 	{
 	}
 
-	bool StateMachine::handleEvent(const sf::Event& event)
+	bool StateMachine::foreach(std::function<bool(const ActivityRef&)> operation)
 	{
-		// Iterate from top to bottom, stop as soon as handleEvent() returns false
-		for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
+		for (auto state : mStack)
 		{
-			if (!(*itr)->handleEvent(event))
+			if (!operation(state))
 				break;
 		}
-		applyPendingChanges();
 
-		return true;
-	}
-
-	bool StateMachine::preUpdate()
-	{
-		return true;
-	}
-
-	bool StateMachine::update(sf::Time dt)
-	{
-		// Iterate from top to bottom, stop as soon as update() returns false
-		for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
-		{
-			if (!(*itr)->update(dt))
-				break;
-		}
-		applyPendingChanges();
-
-		return true;
-	}
-
-	bool StateMachine::postUpdate()
-	{
-		return true;
-	}
-
-	void StateMachine::renderPreUpdate()
-	{
-	}
-
-	void StateMachine::renderUpdate()
-	{
-		// Draw all active states from bottom to top
-		for (StateComponent::Ptr& state : mStack)
-			state->renderUpdate();
-	}
-
-	void StateMachine::renderPostUpdate()
-	{
+		return applyPendingChanges();
 	}
 
 	void StateMachine::pushState(States::ID stateID)
@@ -78,12 +38,12 @@ namespace oct
 		mPendingList.push_back(PendingChange(Clear));
 	}
 
-	bool StateMachine::isempty()
+	bool StateMachine::isEmpty()
 	{
 		return mStack.empty();
 	}
 
-	StateComponent::Ptr StateMachine::createState(States::ID stateID)
+	StateRef StateMachine::createState(States::ID stateID)
 	{
 		auto found = mFactories.find(stateID);
 		assert(found != mFactories.end());
@@ -91,7 +51,7 @@ namespace oct
 		return found->second();
 	}
 
-	void StateMachine::applyPendingChanges()
+	bool StateMachine::applyPendingChanges()
 	{
 		for (PendingChange change : mPendingList)
 		{
@@ -110,7 +70,7 @@ namespace oct
 				break;
 
 			case Clear:
-				for (StateComponent::Ptr& state : mStack)
+				for (StateRef& state : mStack)
 					state->onDestroy();
 
 				mStack.clear();
@@ -119,6 +79,8 @@ namespace oct
 		}
 
 		mPendingList.clear();
+
+		return true;
 	}
 
 	StateMachine::PendingChange::PendingChange(Action action, States::ID stateID)

@@ -1,17 +1,25 @@
 #pragma once
 
+#include <functional>
+
+namespace States
+{
+	enum ID;
+}
+
 namespace oct
 {
-	template <class Identificator>
 	class StateStack
 	{
 	public:
 		virtual ~StateStack() = default;
 
-		virtual void pushState(Identificator stateID) = 0;
+		virtual bool foreach(std::function<bool(const ActivityRef&)> operation) = 0;
+
+		virtual void pushState(States::ID stateID) = 0;
 		virtual void popState() = 0;
 		virtual void clearStates() = 0;
 
-		virtual bool isempty() = 0;
+		virtual bool isEmpty() = 0;
 	};
 }

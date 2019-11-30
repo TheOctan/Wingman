@@ -1,7 +1,8 @@
 #pragma once
 
+#include "Core.h"
+#include "Activity.h"
 #include "StateStack.h"
-#include "StateActivity.h"
 #include "StateComponent.h"
 #include "Adapters/StateIdentifiers.h"
 
@@ -10,7 +11,6 @@
 
 #include <vector>
 #include <utility>
-#include <functional>
 #include <map>
 
 namespace sf
@@ -21,41 +21,32 @@ namespace sf
 
 namespace oct
 {
-	class StateMachine : public StateStack<States::ID>, public StateActivity, private sf::NonCopyable
+	class StateMachine : public StateStack, private sf::NonCopyable
 	{
 	public:
 		enum Action
 		{
 			Push,
 			Pop,
-			Clear,
+			Clear
 		};
 
 	public:
 		explicit			StateMachine(StateComponent::Context context);
 
 		template <typename T, typename... Param>
-		void				registerState(States::ID stateID, Param... arg);
-
-		bool				handleEvent(const sf::Event& event);
-		
-		bool				preUpdate();
-		bool				update(sf::Time dt);
-		bool				postUpdate();
-
-		void				renderPreUpdate();
-		void				renderUpdate();
-		void				renderPostUpdate();
+		void				registerState(States::ID stateID, Param&&... arg);
+		bool				foreach(std::function<bool(const ActivityRef&)> operation);
 
 		void				pushState(States::ID stateID);
 		void				popState();
 		void				clearStates();
 
-		bool				isempty();
+		bool				isEmpty();
 
 	private:
-		StateComponent::Ptr	createState(States::ID stateID);
-		void				applyPendingChanges();
+		StateRef			createState(States::ID stateID);
+		bool				applyPendingChanges();
 
 	private:
 		struct PendingChange
@@ -67,20 +58,13 @@ namespace oct
 		};
 
 	private:
-		std::vector<StateComponent::Ptr>							mStack;
-		std::vector<PendingChange>									mPendingList;
+		std::vector<StateRef>								mStack;
+		std::vector<PendingChange>							mPendingList;
 
-		StateComponent::Context										mContext;
-		std::map<States::ID, std::function<StateComponent::Ptr()>>	mFactories;
+		StateComponent::Context								mContext;
+		std::map<States::ID, std::function<StateRef()>>	mFactories;
 	};
 
-	template<typename T, typename... Param>
-	inline void StateMachine::registerState(States::ID stateID, Param... arg)
-	{
-		mFactories[stateID] = [this, arg...]()
-		{
-			return StateComponent::Ptr(new T(this, mContext, arg...));
-		};
-	}
 }
 
+#include "StateMachine.inl"
