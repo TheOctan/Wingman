@@ -4,8 +4,12 @@ namespace States
 {
 	enum ID
 	{
-		None,
-
-		StatesCount
+		None,			// 
+		Load,			// 
+		MainMenu,		// 
+		Game,			// 
+		Editor,			// 
+		Test,			// Concrete state
+		StatesCount		// 
 	};
 }

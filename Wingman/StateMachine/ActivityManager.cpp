@@ -1,4 +1,5 @@
 #include "ActivityManager.h"
+#include "StateAdapter.h"
 
 namespace oct
 {
@@ -52,5 +53,10 @@ namespace oct
 			state->renderPreUpdate();
 			return true;
 		});
+	}
+
+	void ActivityManager::registerStates() const
+	{
+		machine->registerState<ConcreteState>(States::Test);
 	}
 }
