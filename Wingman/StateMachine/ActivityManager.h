@@ -1,20 +1,14 @@
 #pragma once
 
-#include "Core.h"
 #include "Activity.h"
-#include "StateMachine.h"
-#include "StateComponent.h"
+#include "StateStack.h"
 
 namespace oct
 {
 	class ActivityManager : public Activity
 	{
 	public:
-		ActivityManager(Activity::Context context)
-		{
-			machine = std::make_unique<StateMachine>(context);
-			registerStates();
-		}
+		ActivityManager(StateStack& stack);
 
 		bool handleEvent(const sf::Event& event);
 
@@ -27,9 +21,9 @@ namespace oct
 		void renderPostUpdate();
 
 	protected:
-		virtual void registerStates() const;
+		//virtual void registerStates();
 
 	private:
-		Scope<StateMachine> machine;
+		StateStack* stateStack;
 	};
 }
