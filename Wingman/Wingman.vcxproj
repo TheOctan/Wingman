@@ -148,12 +148,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="StateMachine\ActivityManager.cpp" />
     <ClCompile Include="App\Application.cpp" />
     <ClCompile Include="Engine\Object.cpp" />
     <ClCompile Include="Entities\Boss.cpp" />
     <ClCompile Include="Entities\Bullet.cpp" />
     <ClCompile Include="Entities\Enemy.cpp" />
     <ClCompile Include="Stage\EnemySpawner.cpp" />
+    <ClCompile Include="StateMachine\Adapters\ConcreteState.cpp" />
     <ClCompile Include="StateMachine\StateComponent.cpp" />
     <ClCompile Include="StateMachine\StateMachine.cpp" />
     <ClCompile Include="StateMachine\States\Game.cpp" />
@@ -173,9 +175,12 @@
     <ClCompile Include="Stage\Wingman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App\Resource.h" />
+    <ClInclude Include="StateMachine\ActivityManager.h" />
     <ClInclude Include="App\Application.h" />
-    <ClInclude Include="App\Resource\ResourceHolder.hpp" />
+    <ClInclude Include="App\Resource\ResourceHolder.h" />
     <ClInclude Include="App\Resource\ResourceIdentifiers.h" />
+    <ClInclude Include="Engine\Core.h" />
     <ClInclude Include="Engine\Framerate.h" />
     <ClInclude Include="Engine\Object.h" />
     <ClInclude Include="Engine\types.h" />
@@ -183,9 +188,11 @@
     <ClInclude Include="Entities\Bullet.h" />
     <ClInclude Include="Entities\Enemy.h" />
     <ClInclude Include="Stage\EnemySpawner.h" />
+    <ClInclude Include="StateMachine\Adapters\ConcreteState.h" />
+    <ClInclude Include="StateMachine\StateAdapter.h" />
     <ClInclude Include="StateMachine\StateComponent.h" />
     <ClInclude Include="StateMachine\StateMachine.h" />
-    <ClInclude Include="StateMachine\StateActivity.h" />
+    <ClInclude Include="StateMachine\Activity.h" />
     <ClInclude Include="StateMachine\Adapters\StateIdentifiers.h" />
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateStack.h" />
@@ -208,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App\Resource\ResourceHolder.inl" />
+    <None Include="StateMachine\StateMachine.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,7 +9,7 @@ namespace States
 		MainMenu,		// 
 		Game,			// 
 		Editor,			// 
-		Test,			// Concrete state
+		Test,			// Concrete state fot example
 		StatesCount		// 
 	};
 }

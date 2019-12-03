@@ -1,9 +1,7 @@
 #include "ConcreteState.h"
 
-namespace oct
+
+ConcreteState::ConcreteState(oct::StateStack* stack, Context context)
+	: StateComponent(stack, context)
 {
-	ConcreteState::ConcreteState(StateStack* stack, Context context)
-		: StateComponent(stack, context)
-	{
-	}
 }

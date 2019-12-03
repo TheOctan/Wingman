@@ -84,6 +84,12 @@
     <ClCompile Include="StateMachine\StateComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StateMachine\ActivityManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine\Adapters\ConcreteState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entities\Boss.h">
@@ -158,9 +164,6 @@
     <ClInclude Include="StateMachine\State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachine\StateActivity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StateMachine\StateMachine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -173,18 +176,39 @@
     <ClInclude Include="App\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="App\Resource\ResourceHolder.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="App\Resource\ResourceIdentifiers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StateMachine\StateComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StateMachine\Activity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\ActivityManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\Adapters\ConcreteState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine\StateAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Resource\ResourceHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="App\Resource\ResourceHolder.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="StateMachine\StateMachine.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

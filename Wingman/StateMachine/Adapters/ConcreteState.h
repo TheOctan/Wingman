@@ -2,13 +2,11 @@
 
 #include "StateComponent.h"
 
-namespace oct
+
+class ConcreteState : public oct::StateComponent
 {
-	class ConcreteState : public StateComponent
-	{
-	public:
-		ConcreteState(StateStack* stack, Context context);
+public:
+	ConcreteState(oct::StateStack* stack, Context context);
 
 
-	};
-}
+};
