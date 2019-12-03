@@ -4,7 +4,7 @@
 
 namespace oct
 {
-	StateMachine::StateMachine(StateComponent::Context context)
+	StateMachine::StateMachine(Activity::Context context)
 	:	mStack		(),
 		mFactories	(),
 		mPendingList(),
@@ -38,7 +38,7 @@ namespace oct
 		mPendingList.push_back(PendingChange(Clear));
 	}
 
-	bool StateMachine::isEmpty()
+	bool StateMachine::isEmpty() const
 	{
 		return mStack.empty();
 	}

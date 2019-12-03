@@ -6,7 +6,6 @@
 #include "State.h"
 #include "Activity.h"
 #include "StateStack.h"
-#include "Resource/ResourceIdentifiers.h"
 #include "Adapters/StateIdentifiers.h"
 
 #include <SFML/Graphics.hpp>
@@ -16,19 +15,6 @@ namespace oct
 	class StateComponent : public State, public Object, sf::NonCopyable
 	{
 		OCT_OBJECT(StateComponent, Object);
-
-	public:
-		struct Context
-		{
-			Context(
-				sf::RenderWindow&	window,
-				TextureHolder&		textures,
-				FontHolder&			fonts);
-
-			sf::RenderWindow*	window;
-			TextureHolder*		textures;
-			FontHolder*			fonts;
-		};
 
 	public:
 		StateComponent(StateStack* stack, Context context);

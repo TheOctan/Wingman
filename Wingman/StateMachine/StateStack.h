@@ -20,6 +20,6 @@ namespace oct
 		virtual void popState() = 0;
 		virtual void clearStates() = 0;
 
-		virtual bool isEmpty() = 0;
+		virtual bool isEmpty() const = 0;
 	};
 }

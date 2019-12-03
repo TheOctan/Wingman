@@ -32,7 +32,7 @@ namespace oct
 		};
 
 	public:
-		explicit			StateMachine(StateComponent::Context context);
+		explicit			StateMachine(Activity::Context context);
 
 		template <typename T, typename... Param>
 		void				registerState(States::ID stateID, Param&&... arg);
@@ -42,7 +42,7 @@ namespace oct
 		void				popState();
 		void				clearStates();
 
-		bool				isEmpty();
+		bool				isEmpty() const;
 
 	private:
 		StateRef			createState(States::ID stateID);
@@ -61,7 +61,7 @@ namespace oct
 		std::vector<StateRef>								mStack;
 		std::vector<PendingChange>							mPendingList;
 
-		StateComponent::Context								mContext;
+		Activity::Context								mContext;
 		std::map<States::ID, std::function<StateRef()>>	mFactories;
 	};
 

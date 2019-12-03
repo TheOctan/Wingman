@@ -2,7 +2,7 @@
 
 namespace oct
 {
-	StateComponent::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts)
+	Activity::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts)
 	:	window	(&window),
 		textures(&textures),
 		fonts	(&fonts)
@@ -30,7 +30,7 @@ namespace oct
 		stack->clearStates();
 	}
 
-	StateComponent::Context StateComponent::getBaseContext() const
+	Activity::Context StateComponent::getBaseContext() const
 	{
 		return this->context;
 	}
