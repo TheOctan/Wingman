@@ -7,7 +7,7 @@ namespace States
 		None,			// 
 		Load,			// 
 		MainMenu,		// 
-		Game,			// 
+		Game,			// Game state contains gameplay
 		Editor,			// 
 		Test,			// Concrete state fot example
 		StatesCount		// 

@@ -1605,9 +1605,6 @@ void Game::drawParticles()
 
 void Game::draw()
 {
-	//CLEAR AND BEGIN DRAW
-	this->window->clear();
-
 	//Set view
 	this->window->setView(this->mainView);
 
@@ -1641,9 +1638,6 @@ void Game::draw()
 	this->window->setView(this->window->getDefaultView());
 
 	this->drawUI();
-
-	//FINISH DRAW
-	this->window->display();
 }
 
 

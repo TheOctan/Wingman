@@ -6,5 +6,6 @@
 #include "Adapters/StateIdentifiers.h"
 
 #include "Adapters/ConcreteState.h"
+#include "Adapters/GameState.h"
 
 #endif // !STATE_ADAPTER_H
