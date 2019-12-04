@@ -43,6 +43,11 @@ namespace oct
 		return mStack.empty();
 	}
 
+	int StateMachine::countStates() const
+	{
+		return mStack.size();
+	}
+
 	StateRef StateMachine::createState(States::ID stateID)
 	{
 		auto found = mFactories.find(stateID);

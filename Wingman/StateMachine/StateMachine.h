@@ -43,6 +43,7 @@ namespace oct
 		void				clearStates();
 
 		bool				isEmpty() const;
+		int					countStates() const;
 
 	private:
 		StateRef			createState(States::ID stateID);

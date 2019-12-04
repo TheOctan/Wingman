@@ -21,5 +21,6 @@ namespace oct
 		virtual void clearStates() = 0;
 
 		virtual bool isEmpty() const = 0;
+		virtual int countStates() const = 0;
 	};
 }
