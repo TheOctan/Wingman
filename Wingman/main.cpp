@@ -1,11 +1,31 @@
-#include"Game.h"
-#include"GameMapMaker.h"
+#include <iostream>
 
-bool MAPMAKER = false;
+#include "Application.h"
+
+#include "Game.h"
+#include "GameMapMaker.h"
+
+bool MAPMAKER = true;
+#define GAME_ENGINE_APPLICATION
 
 int main()
 {
 	srand(time(NULL));
+
+
+#ifdef GAME_ENGINE_APPLICATION
+
+	Application app;
+
+	try
+	{
+		app.run();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+#else
 
 	RenderWindow window(VideoMode(1920, 1080), "Wingman Game", Style::Default);
 
@@ -32,14 +52,22 @@ int main()
 		if (MAPMAKER)
 		{
 			gameMapMaker.update(dt);
+
+			window.clear();
 			gameMapMaker.draw();
+			window.display();
 		}
 		else
 		{
 			game.update(dt);
+
+			window.clear();
 			game.draw();
+			window.display();
 		}
 	}
+#endif
+
 
 	return 0;
 }
