@@ -25,7 +25,7 @@ namespace oct
 
 	bool ActivityManager::update(sf::Time dt)
 	{
-		return stateStack->foreach([&dt](const ActivityRef& state) {
+		return stateStack->foreach([dt](const ActivityRef& state) {
 			return state->update(dt);
 		});
 	}
@@ -48,7 +48,7 @@ namespace oct
 	void ActivityManager::renderUpdate()
 	{
 		stateStack->foreach([](const ActivityRef& state) {
-			state->renderPreUpdate();
+			state->renderUpdate();
 			return true;
 		});
 	}
@@ -56,7 +56,7 @@ namespace oct
 	void ActivityManager::renderPostUpdate()
 	{
 		stateStack->foreach([](const ActivityRef& state) {
-			state->renderPreUpdate();
+			state->renderPostUpdate();
 			return true;
 		});
 	}

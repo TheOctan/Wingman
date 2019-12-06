@@ -21,16 +21,41 @@ Application::Application()
 	mFonts.load(Fonts::Main, "Fonts/Dosis-Light.ttf");
 
 	mStatisticsText.setFont(mFonts.get(Fonts::Main));
-	mStatisticsText.setPosition(5.f, 5.f);
-	mStatisticsText.setCharacterSize(10u);
+	mStatisticsText.setPosition(mWindow.getSize().x - mStatisticsText.getGlobalBounds().width - 200.f, 50.f);
+	mStatisticsText.setCharacterSize(30u);
 
 	registerStates();
-	machine.pushState(States::Test);
+	machine.pushState(States::Game);
 }
 
 void Application::run()
 {
+	sf::Clock clock;
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
+	while (mWindow.isOpen())
+	{
+		sf::Time dt = clock.restart();
+
+		if (dt > sf::seconds(0.25f))
+			dt = sf::seconds(0.25f);
+
+		timeSinceLastUpdate += dt;
+		while (timeSinceLastUpdate > TimePerFrame)
+		{
+			timeSinceLastUpdate -= TimePerFrame;
+
+			processInput();
+			update(TimePerFrame);
+
+			// Check inside this loop, because stack might be empty before update() call
+			if (machine.isEmpty())
+				mWindow.close();
+		}
+
+		updateStatistics(dt);
+		render();
+	}
 }
 
 void Application::processInput()
@@ -68,7 +93,7 @@ void Application::updateStatistics(sf::Time dt)
 	mStatisticsNumFrames += 1;
 	if (mStatisticsUpdateTime >= sf::seconds(1.0f))
 	{
-		mStatisticsText.setString("FPS: " + std::to_string(mStatisticsNumFrames));
+		mStatisticsText.setString("FPS: " + std::to_string(mStatisticsNumFrames) + "\nCount states: " + std::to_string(machine.countStates()));
 
 		mStatisticsUpdateTime -= sf::seconds(1.0f);
 		mStatisticsNumFrames = 0;
@@ -78,6 +103,7 @@ void Application::updateStatistics(sf::Time dt)
 void Application::registerStates()
 {
 	machine.registerState<ConcreteState>(States::Test);
+	machine.registerState<GameState>(States::Game);
 }
 
 oct::Activity::Context Application::getBaseContext()
