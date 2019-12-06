@@ -19,7 +19,9 @@ public:
 
 private:
 	void					processInput();
+	void					preUpdate(sf::Time dt);
 	void					update(sf::Time dt);
+	void					postUpdate(sf::Time dt);
 	void					render();
 
 	void					updateStatistics(sf::Time dt);

@@ -25,7 +25,7 @@ Application::Application()
 	mStatisticsText.setCharacterSize(30u);
 
 	registerStates();
-	machine.pushState(States::Game);
+	machine.pushState(States::Editor);
 }
 
 void Application::run()
@@ -40,6 +40,7 @@ void Application::run()
 		if (dt > sf::seconds(0.25f))
 			dt = sf::seconds(0.25f);
 
+		preUpdate(dt);
 		timeSinceLastUpdate += dt;
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
@@ -52,6 +53,7 @@ void Application::run()
 			if (machine.isEmpty())
 				mWindow.close();
 		}
+		postUpdate(dt);
 
 		updateStatistics(dt);
 		render();
@@ -73,9 +75,19 @@ void Application::processInput()
 	}
 }
 
+void Application::preUpdate(sf::Time dt)
+{
+	activity.preUpdate(dt);
+}
+
 void Application::update(sf::Time dt)
 {
 	activity.update(dt);
+}
+
+void Application::postUpdate(sf::Time dt)
+{
+	activity.postUpdate(dt);
 }
 
 void Application::render()

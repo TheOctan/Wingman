@@ -16,10 +16,10 @@ namespace oct
 		});
 	}
 
-	bool ActivityManager::preUpdate()
+	bool ActivityManager::preUpdate(sf::Time dt)
 	{
-		return stateStack->foreach([](const ActivityRef& state) {
-			return state->preUpdate();
+		return stateStack->foreach([dt](const ActivityRef& state) {
+			return state->preUpdate(dt);
 		});
 	}
 
@@ -30,10 +30,10 @@ namespace oct
 		});
 	}
 
-	bool ActivityManager::postUpdate()
+	bool ActivityManager::postUpdate(sf::Time dt)
 	{
-		return stateStack->foreach([](const ActivityRef& state) {
-			return state->postUpdate();
+		return stateStack->foreach([dt](const ActivityRef& state) {
+			return state->postUpdate(dt);
 		});
 	}
 

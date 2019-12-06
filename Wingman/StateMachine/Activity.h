@@ -27,9 +27,9 @@ namespace oct
 
 		virtual bool handleEvent(const sf::Event& event) = 0;
 
-		virtual bool preUpdate() = 0;
+		virtual bool preUpdate(sf::Time dt) = 0;
 		virtual bool update(sf::Time dt) = 0;
-		virtual bool postUpdate() = 0;
+		virtual bool postUpdate(sf::Time dt) = 0;
 
 		virtual void renderPreUpdate() = 0;
 		virtual void renderUpdate() = 0;

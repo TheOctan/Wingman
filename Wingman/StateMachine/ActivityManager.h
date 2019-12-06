@@ -12,9 +12,9 @@ namespace oct
 
 		bool handleEvent(const sf::Event& event);
 
-		bool preUpdate();
+		bool preUpdate(sf::Time dt);
 		bool update(sf::Time dt);
-		bool postUpdate();
+		bool postUpdate(sf::Time dt);
 
 		void renderPreUpdate();
 		void renderUpdate();

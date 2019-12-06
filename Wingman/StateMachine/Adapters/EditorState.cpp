@@ -2,6 +2,7 @@
 
 EditorState::EditorState(oct::StateStack* stack, Context context)
 	: StateComponent(stack, context),
+	game(getBaseContext().window),
 	editor(getBaseContext().window)
 {
 }
@@ -13,9 +14,9 @@ bool EditorState::handleEvent(const sf::Event& event)
 	return true;
 }
 
-bool EditorState::update(sf::Time dt)
+bool EditorState::postUpdate(sf::Time dt)
 {
-	StateComponent::update(dt);
+	StateComponent::postUpdate(dt);
 	editor.update(dt.asSeconds());
 
 	return true;

@@ -2,6 +2,7 @@
 
 #include "StateComponent.h"
 #include "GameMapMaker.h"
+#include "Game.h"
 
 class EditorState : public oct::StateComponent
 {
@@ -10,11 +11,12 @@ public:
 
 	virtual bool handleEvent(const sf::Event& event) override;
 
-	virtual bool update(sf::Time dt) override;
+	virtual bool postUpdate(sf::Time dt) override;
 
 	virtual void renderUpdate() override;
 
 private:
-	GameMapMaker editor;
+	Game			game;
+	GameMapMaker	editor;
 };
 
