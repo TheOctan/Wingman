@@ -7,5 +7,6 @@
 
 #include "Adapters/ConcreteState.h"
 #include "Adapters/GameState.h"
+#include "Adapters/EditorState.h"
 
 #endif // !STATE_ADAPTER_H

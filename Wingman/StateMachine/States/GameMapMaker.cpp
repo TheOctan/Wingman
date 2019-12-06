@@ -776,7 +776,7 @@ void GameMapMaker::drawMap()
 void GameMapMaker::draw()
 {
 	//CLEAR AND BEGIN DRAW
-	this->window->clear();
+	//this->window->clear();
 
 	//Set view
 	this->window->setView(this->mainView);
@@ -804,5 +804,5 @@ void GameMapMaker::draw()
 	}
 
 	//FINISH DRAW
-	this->window->display();
+	//this->window->display();
 }

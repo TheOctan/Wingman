@@ -10,9 +10,6 @@ bool GameState::handleEvent(const sf::Event& event)
 {
 	StateComponent::handleEvent(event);
 
-	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
-		requestStateClear();
-
 	return true;
 }
 

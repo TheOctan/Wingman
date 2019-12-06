@@ -8,7 +8,7 @@ namespace States
 		Load,			// 
 		MainMenu,		// 
 		Game,			// Game state contains gameplay
-		Editor,			// 
+		Editor,			// Editor allows to edit levels
 		Test,			// Concrete state fot example
 		StatesCount		// 
 	};

@@ -67,6 +67,9 @@ void Application::processInput()
 
 		if (event.type == sf::Event::Closed)
 			mWindow.close();
+
+		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
+			mWindow.close();
 	}
 }
 
@@ -104,6 +107,7 @@ void Application::registerStates()
 {
 	machine.registerState<ConcreteState>(States::Test);
 	machine.registerState<GameState>(States::Game);
+	machine.registerState<EditorState>(States::Editor);
 }
 
 oct::Activity::Context Application::getBaseContext()
