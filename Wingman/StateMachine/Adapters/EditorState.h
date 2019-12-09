@@ -11,7 +11,7 @@ public:
 
 	virtual bool handleEvent(const sf::Event& event) override;
 
-	virtual bool postUpdate(sf::Time dt) override;
+	virtual bool update(sf::Time dt) override;
 
 	virtual void renderUpdate() override;
 

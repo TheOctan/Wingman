@@ -14,9 +14,9 @@ bool EditorState::handleEvent(const sf::Event& event)
 	return true;
 }
 
-bool EditorState::postUpdate(sf::Time dt)
+bool EditorState::update(sf::Time dt)
 {
-	StateComponent::postUpdate(dt);
+	StateComponent::update(dt);
 	editor.update(dt.asSeconds());
 
 	return true;

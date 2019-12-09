@@ -13,9 +13,9 @@ bool GameState::handleEvent(const sf::Event& event)
 	return true;
 }
 
-bool GameState::update(sf::Time dt)
+bool GameState::postUpdate(sf::Time dt)
 {
-	StateComponent::update(dt);
+	StateComponent::postUpdate(dt);
 	game.update(dt.asSeconds());
 
 	return true;

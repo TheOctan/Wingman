@@ -16,7 +16,6 @@ Application::Application()
 	mStatisticsNumFrames(0)
 {
 	mWindow.setKeyRepeatEnabled(false);
-	mWindow.setVerticalSyncEnabled(true);
 
 	mFonts.load(Fonts::Main, "Fonts/Dosis-Light.ttf");
 
@@ -25,7 +24,7 @@ Application::Application()
 	mStatisticsText.setCharacterSize(30u);
 
 	registerStates();
-	machine.pushState(States::Editor);
+	machine.pushState(States::Game);
 }
 
 void Application::run()
@@ -94,9 +93,8 @@ void Application::render()
 {
 	mWindow.clear();
 
-	activity.renderUpdate();
-
 	mWindow.setView(mWindow.getDefaultView());
+	activity.renderUpdate();
 	mWindow.draw(mStatisticsText);
 
 	mWindow.display();
