@@ -14,8 +14,11 @@ namespace oct
 
 	bool StateMachine::foreach(std::function<bool(const ActivityRef&)> operation)
 	{
-		for (auto state : mStack)
+		// Iterate from top to bottom, stop as soon as update() returns false
+		for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
 		{
+			const auto& state = *itr;
+
 			if (!operation(state))
 				break;
 		}
