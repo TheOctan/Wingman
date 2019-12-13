@@ -3,8 +3,7 @@
 std::string MainMenuState::fontPath = "Fonts/Dosis-Light.ttf";
 
 MainMenuState::MainMenuState(oct::StateStack* stack, Context context)
-	: StateComponent(stack, context),
-	game(getBaseContext().window)
+	: StateComponent(stack, context)
 {
 }
 
@@ -31,6 +30,7 @@ void MainMenuState::onCreate()
 	menu.setFont(font);
 	menu.setTitle("Main menu");
 	menu.setFillColor(sf::Color(255, 255, 255, 150));
+	menu.setOutlineColor(sf::Color::Transparent);
 
 	menu.addWidget(startButton);
 	menu.addWidget(editButton);
@@ -57,23 +57,13 @@ bool MainMenuState::handleEvent(const sf::Event& event)
 
 bool MainMenuState::update(sf::Time dt)
 {
-	StateComponent::update(dt);
-
-	return false;
-}
-
-bool MainMenuState::postUpdate(sf::Time dt)
-{
-	StateComponent::postUpdate(dt);
-
-	return false;
+	return StateComponent::update(dt);
 }
 
 void MainMenuState::renderUpdate()
 {
 	StateComponent::renderUpdate();
 
-	game.draw();
 	getBaseContext().window->draw(menu);
 }
 
@@ -89,7 +79,8 @@ void MainMenuState::onEditButtonClick(gui::Widget* sender, const WidgetEventArgs
 
 void MainMenuState::onSettingsButtonClick(gui::Widget* sender, const WidgetEventArgs& e)
 {
-
+	requestStackPop();
+	requestStackPush(States::Settings);
 }
 
 void MainMenuState::onExitButtonClick(gui::Widget* sender, const WidgetEventArgs& e)

@@ -29,11 +29,11 @@ namespace oct
 		virtual void onRestart() {}
 		virtual void onDestroy() {}
 
-		virtual bool handleEvent(const sf::Event& event) { return true; }
+		virtual bool handleEvent(const sf::Event& event) { return false; }
 
-		virtual bool preUpdate(sf::Time dt) { return true; }
-		virtual bool update(sf::Time dt) { return true; }
-		virtual bool postUpdate(sf::Time dt) { return true; }
+		virtual bool preUpdate(sf::Time dt) { return false; }
+		virtual bool update(sf::Time dt) { return false; }
+		virtual bool postUpdate(sf::Time dt) { return false; }
 
 		virtual void renderPreUpdate() {}
 		virtual void renderUpdate() {}
