@@ -40,7 +40,6 @@ namespace gui
 		Widget(WidgetSize size);
 		virtual ~Widget() = default;
 
-				
 		virtual void setText		(const sf::String& str);
 		virtual void setTexture		(const sf::Texture& texture);
 				void setFont		(const sf::Font& font);

@@ -26,6 +26,8 @@ namespace gui
 		void setTitle	(const sf::String& title);
 		void setTexture	(const sf::Texture& texture);
 		void setFont	(const sf::Font& font);
+		void setFillColor	(const sf::Color color);
+		void setOutlineColor(const sf::Color color);
 
 		const sf::Vector2f& getSize()		const;
 

@@ -43,6 +43,7 @@ namespace gui
 	void StackMenu::setTitle(const sf::String& title)
 	{
 		m_titleText.setString(title);
+		updateText();
 	}
 
 	void StackMenu::setTexture(const sf::Texture & texture)
@@ -55,6 +56,16 @@ namespace gui
 	void StackMenu::setFont(const sf::Font& font)
 	{
 		m_titleText.setFont(font);
+	}
+
+	void StackMenu::setFillColor(const sf::Color color)
+	{
+		m_background.setFillColor(color);
+	}
+
+	void StackMenu::setOutlineColor(const sf::Color color)
+	{
+		m_background.setOutlineColor(color);
 	}
 
 	const sf::Vector2f& StackMenu::getSize() const

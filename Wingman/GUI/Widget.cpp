@@ -36,6 +36,7 @@ namespace gui
 	void Widget::setFont(const sf::Font& font)
 	{
 		m_text.setFont(font);
+		updateText();
 	}
 
 	void Widget::handleEvent(sf::Event e)
