@@ -66,9 +66,13 @@ namespace oct
 			switch (change.action)
 			{
 			case Push:
-				mStack.push_back(createState(change.stateID));
-				break;
+			{
+				const auto& state = createState(change.stateID);
+				state->onCreate();
 
+				mStack.push_back(state);
+				break;
+			}
 			case Pop:
 				mStack.back()->onDestroy();
 				mStack.pop_back();

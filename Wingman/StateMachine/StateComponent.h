@@ -3,6 +3,7 @@
 // #include <SFML/Graphics.hpp>
 #include "Core.h"
 #include "Object.h"
+#include "Resource.h"
 #include "State.h"
 #include "Activity.h"
 #include "StateStack.h"
@@ -20,6 +21,14 @@ namespace oct
 		StateComponent(StateStack* stack, Context context);
 		virtual ~StateComponent() = default;
 
+		virtual void onCreate() {}
+		virtual void onStart() {}
+		virtual void onResume() {}
+		virtual void onPause() {}
+		virtual void onStop() {}
+		virtual void onRestart() {}
+		virtual void onDestroy() {}
+
 		virtual bool handleEvent(const sf::Event& event) { return true; }
 
 		virtual bool preUpdate(sf::Time dt) { return true; }
@@ -29,14 +38,6 @@ namespace oct
 		virtual void renderPreUpdate() {}
 		virtual void renderUpdate() {}
 		virtual void renderPostUpdate() {}
-
-		virtual void onCreate() {}
-		virtual void onStart() {}
-		virtual void onResume() {}
-		virtual void onPause() {}
-		virtual void onStop() {}
-		virtual void onRestart() {}
-		virtual void onDestroy() {}
 
 	protected:
 		void requestStackPush(States::ID stateID);
