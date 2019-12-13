@@ -4,9 +4,12 @@
 #include <string>
 
 const sf::Time Application::TimePerFrame = sf::seconds(1.f / 60.f);
+const std::string Application::appName = "Wingman";
+const int Application::winWidth = 1920;
+const int Application::winHeight = 1080;
 
 Application::Application()
-	: mWindow(sf::VideoMode(1920, 1080), "Wingman Game", sf::Style::Default),
+	: mWindow(sf::VideoMode(winWidth, winHeight), appName, sf::Style::Close),
 	mTextures(),
 	mFonts(),
 	machine(getBaseContext()),
@@ -18,13 +21,12 @@ Application::Application()
 	mWindow.setKeyRepeatEnabled(false);
 
 	mFonts.load(Fonts::Main, "Fonts/Dosis-Light.ttf");
-
 	mStatisticsText.setFont(mFonts.get(Fonts::Main));
-	mStatisticsText.setPosition(mWindow.getSize().x - mStatisticsText.getGlobalBounds().width - 200.f, 50.f);
 	mStatisticsText.setCharacterSize(30u);
 
 	registerStates();
 	machine.pushState(States::Game);
+	machine.pushState(States::MainMenu);
 }
 
 void Application::run()
@@ -69,8 +71,8 @@ void Application::processInput()
 		if (event.type == sf::Event::Closed)
 			mWindow.close();
 
-		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
-			mWindow.close();
+		if (event.type == Event::Resized)
+			mWindow.setView(sf::View(sf::FloatRect(0, 0, (float)event.size.width, (float)event.size.height)));
 	}
 }
 
@@ -93,7 +95,6 @@ void Application::render()
 {
 	mWindow.clear();
 
-	mWindow.setView(mWindow.getDefaultView());
 	activity.renderUpdate();
 	mWindow.draw(mStatisticsText);
 
@@ -102,6 +103,8 @@ void Application::render()
 
 void Application::updateStatistics(sf::Time dt)
 {
+	mStatisticsText.setPosition(mWindow.getSize().x - mStatisticsText.getGlobalBounds().width - 50.f, 50.f);
+
 	mStatisticsUpdateTime += dt;
 	mStatisticsNumFrames += 1;
 	if (mStatisticsUpdateTime >= sf::seconds(1.0f))
@@ -118,9 +121,11 @@ void Application::registerStates()
 	machine.registerState<ConcreteState>(States::Test);
 	machine.registerState<GameState>(States::Game);
 	machine.registerState<EditorState>(States::Editor);
+	machine.registerState<MainMenuState>(States::MainMenu);
+	machine.registerState<SettingsState>(States::Settings);
 }
 
 oct::Activity::Context Application::getBaseContext()
 {
-	return oct::Activity::Context(mWindow, mTextures, mFonts);
+	return oct::Activity::Context(mWindow, mTextures, mFonts, mConfiguration);
 }

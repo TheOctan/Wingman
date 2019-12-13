@@ -2,10 +2,14 @@
 
 namespace oct
 {
-	Activity::Context::Context(sf::RenderWindow& window, TextureHolder& textures, FontHolder& fonts)
-	:	window	(&window),
-		textures(&textures),
-		fonts	(&fonts)
+	Activity::Context::Context(sf::RenderWindow&	window,
+							   TextureHolder&		textures,
+							   FontHolder&			fonts,
+							   Settings&			configuration)
+	:	window			(&window),
+		textures		(&textures),
+		fonts			(&fonts),
+		configuration	(&configuration)
 	{
 	}
 

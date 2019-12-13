@@ -9,5 +9,6 @@
 #include "Adapters/GameState.h"
 #include "Adapters/EditorState.h"
 #include "Adapters/MainMenuState.h"
+#include "Adapters/SettingsState.h"
 
 #endif // !STATE_ADAPTER_H

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Settings.h"
 #include "Resource/ResourceIdentifiers.h"
 
 #include <SFML/Graphics.hpp>
@@ -15,11 +16,13 @@ namespace oct
 			Context(
 				sf::RenderWindow&	window,
 				TextureHolder&		textures,
-				FontHolder&			fonts);
+				FontHolder&			fonts,
+				Settings&			configuration);
 
 			sf::RenderWindow*	window;
 			TextureHolder*		textures;
 			FontHolder*			fonts;
+			Settings*			configuration;
 		};
 
 	public:

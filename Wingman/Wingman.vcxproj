@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Wingman\include;$(SolutionDir)\Wingman\Entities;$(SolutionDir)\Wingman\GUI;$(SolutionDir)\Wingman\Stage;$(SolutionDir)\Wingman\Util;$(SolutionDir)\Wingman\Engine;$(SolutionDir)\Wingman\StateMachine;$(SolutionDir)\Wingman\StateMachine\States;$(SolutionDir)\Wingman\App</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Wingman;$(SolutionDir)\Wingman\include;$(SolutionDir)\Wingman\Entities;$(SolutionDir)\Wingman\GUI;$(SolutionDir)\Wingman\Stage;$(SolutionDir)\Wingman\Util;$(SolutionDir)\Wingman\Engine;$(SolutionDir)\Wingman\StateMachine;$(SolutionDir)\Wingman\StateMachine\States;$(SolutionDir)\Wingman\App;$(SolutionDir)\Wingman\System;$(SolutionDir)\Wingman\Event</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,7 +119,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)\Wingman\include;$(SolutionDir)\Wingman\Entities;$(SolutionDir)\Wingman\GUI;$(SolutionDir)\Wingman\Stage;$(SolutionDir)\Wingman\Util;$(SolutionDir)\Wingman\Engine;$(SolutionDir)\Wingman\StateMachine;$(SolutionDir)\Wingman\StateMachine\States;$(SolutionDir)\Wingman\App</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Wingman;$(SolutionDir)\Wingman\include;$(SolutionDir)\Wingman\Entities;$(SolutionDir)\Wingman\GUI;$(SolutionDir)\Wingman\Stage;$(SolutionDir)\Wingman\Util;$(SolutionDir)\Wingman\Engine;$(SolutionDir)\Wingman\StateMachine;$(SolutionDir)\Wingman\StateMachine\States;$(SolutionDir)\Wingman\App;$(SolutionDir)\Wingman\System;$(SolutionDir)\Wingman\Event</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +148,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Event\EventArgs.cpp" />
+    <ClCompile Include="GUI\Button.cpp" />
+    <ClCompile Include="GUI\Lock.cpp" />
+    <ClCompile Include="GUI\ScrollBar.cpp" />
+    <ClCompile Include="GUI\StackMenu.cpp" />
+    <ClCompile Include="GUI\TextBox.cpp" />
+    <ClCompile Include="GUI\Widget.cpp" />
+    <ClCompile Include="StateMachine\Adapters\SplashScreenState.cpp" />
+    <ClCompile Include="StateMachine\Adapters\SettingsState.cpp" />
+    <ClCompile Include="StateMachine\Adapters\PauseState.cpp" />
+    <ClCompile Include="StateMachine\Adapters\MainMenuState.cpp" />
     <ClCompile Include="StateMachine\Adapters\EditorState.cpp" />
     <ClCompile Include="StateMachine\Adapters\GameState.cpp" />
     <ClCompile Include="StateMachine\ActivityManager.cpp" />
@@ -177,7 +188,23 @@
     <ClCompile Include="Stage\Wingman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App\Settings.h" />
     <ClInclude Include="App\Resource.h" />
+    <ClInclude Include="Event.hpp" />
+    <ClInclude Include="Event\EventArgs.hpp" />
+    <ClInclude Include="Event\WidgetEvent.hpp" />
+    <ClInclude Include="Event\WidgetEventArgs.hpp" />
+    <ClInclude Include="GUI.hpp" />
+    <ClInclude Include="GUI\Button.hpp" />
+    <ClInclude Include="GUI\Lock.hpp" />
+    <ClInclude Include="GUI\ScrollBar.hpp" />
+    <ClInclude Include="GUI\StackMenu.hpp" />
+    <ClInclude Include="GUI\TextBox.hpp" />
+    <ClInclude Include="GUI\Widget.hpp" />
+    <ClInclude Include="StateMachine\Adapters\SplashScreenState.h" />
+    <ClInclude Include="StateMachine\Adapters\SettingsState.h" />
+    <ClInclude Include="StateMachine\Adapters\PauseState.h" />
+    <ClInclude Include="StateMachine\Adapters\MainMenuState.h" />
     <ClInclude Include="StateMachine\Adapters\EditorState.h" />
     <ClInclude Include="StateMachine\Adapters\GameState.h" />
     <ClInclude Include="StateMachine\ActivityManager.h" />
@@ -201,6 +228,7 @@
     <ClInclude Include="StateMachine\State.h" />
     <ClInclude Include="StateMachine\StateStack.h" />
     <ClInclude Include="StateMachine\States\Game.h" />
+    <ClInclude Include="System\Delegate.h" />
     <ClInclude Include="Util\dArr.h" />
     <ClInclude Include="StateMachine\States\GameMapMaker.h" />
     <ClInclude Include="StateMachine\States\MainMenu.h" />
