@@ -40,6 +40,17 @@ namespace gui
 		updateState();
 	}
 
+	void ScrollBar::setValue(int value)
+	{
+		if (value >= minValue && value <= maxValue)
+			this->value = value;
+	}
+
+	int ScrollBar::getValue()
+	{
+		return value;
+	}
+
 	void ScrollBar::drawResource(sf::RenderTarget & target, sf::RenderStates states) const
 	{
 		target.draw(m_bar, states);
@@ -75,9 +86,13 @@ namespace gui
 	{
 		if (e.mouseButton.button == sf::Mouse::Left)
 		{
-			if (isEntered && isClicked)
+			if (isClicked)
 			{
-				state = WidgetState::selected;
+				if (isEntered)
+				{
+					state = WidgetState::selected;
+				}
+
 				event(this, WidgetEvent("", value, isActive));
 			}
 
@@ -93,13 +108,13 @@ namespace gui
 
 	void ScrollBar::updateText()
 	{
-		m_text.setString(m_message + std::to_string(value) + "/" + std::to_string(maxValue*step));
+		m_text.setString(m_message + std::to_string(value) + "/" + std::to_string(maxValue * step));
 
 		m_text.setOrigin(m_text.getGlobalBounds().width / 2.f,
-			m_text.getGlobalBounds().height / 2.f);
+						 m_text.getGlobalBounds().height / 2.f);
 
 		m_text.setPosition(m_rect.getGlobalBounds().width / 2.0f,
-			m_rect.getGlobalBounds().height / 2.5f);
+						   m_rect.getGlobalBounds().height / 2.5f);
 	}
 
 	void ScrollBar::updateState()
@@ -114,7 +129,7 @@ namespace gui
 	{
 		float length = m_rect.getGlobalBounds().width - m_bar.getGlobalBounds().width;
 		float range = float(maxValue - minValue);
-		
+
 		if (isClicked)
 		{
 			m_bar.setPosition(localMousePos.x - m_bar.getGlobalBounds().width / 2, 0);
@@ -127,13 +142,13 @@ namespace gui
 			{
 				m_bar.setPosition(m_rect.getGlobalBounds().width - m_bar.getGlobalBounds().width, 0);
 			}
-			
+
 			float offset = length / range;
 			value = (int((m_bar.getPosition().x + offset / 2.f) * range / length) + minValue) * step;
 		}
 		else
 		{
-			m_bar.setPosition((value / step - minValue)*length / range, 0);
+			m_bar.setPosition((value / step - minValue) * length / range, 0);
 		}
 	}
 

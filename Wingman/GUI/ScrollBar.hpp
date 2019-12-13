@@ -13,9 +13,10 @@ namespace gui
 		ScrollBar();
 		ScrollBar(const sf::String& str, int min = 0, int max = 100, int step = 1);
 
-		void setText(const sf::String& str)			override;		
-
+		void setText(const sf::String& str)			override;
 		void setTexture(const sf::Texture& texture)	override;
+		void setValue(int value);
+		int  getValue();
 
 	private:
 		void drawResource(sf::RenderTarget& target, sf::RenderStates states) const;
