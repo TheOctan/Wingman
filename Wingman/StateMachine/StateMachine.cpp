@@ -12,9 +12,15 @@ namespace oct
 	{
 	}
 
-	bool StateMachine::foreach(std::function<bool(const ActivityRef&)> operation)
+	void StateMachine::foreach(std::function<void(const ActivityRef&)> operation)
 	{
-		// Iterate from top to bottom, stop as soon as update() returns false
+		for (auto& state : mStack)
+			operation(state);
+	}
+
+	bool StateMachine::foreach_if(std::function<bool(const ActivityRef&)> operation)
+	{
+		// Iterate from top to bottom, stop as soon as operation() returns false
 		for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
 		{
 			const auto& state = *itr;

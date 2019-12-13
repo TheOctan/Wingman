@@ -14,7 +14,8 @@ namespace oct
 	public:
 		virtual ~StateStack() = default;
 
-		virtual bool foreach(std::function<bool(const ActivityRef&)> operation) = 0;
+		virtual void foreach(std::function<void(const ActivityRef&)> operation) = 0;
+		virtual bool foreach_if(std::function<bool(const ActivityRef&)> operation) = 0;
 
 		virtual void pushState(States::ID stateID) = 0;
 		virtual void popState() = 0;

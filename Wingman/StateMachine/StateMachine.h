@@ -36,7 +36,8 @@ namespace oct
 
 		template <typename T, typename... Param>
 		void				registerState(States::ID stateID, Param&&... arg);
-		bool				foreach(std::function<bool(const ActivityRef&)> operation);
+		void				foreach(std::function<void(const ActivityRef&)> operation);
+		bool				foreach_if(std::function<bool(const ActivityRef&)> operation);
 
 		void				pushState(States::ID stateID);
 		void				popState();

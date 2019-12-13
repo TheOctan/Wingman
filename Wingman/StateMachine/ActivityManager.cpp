@@ -11,28 +11,28 @@ namespace oct
 
 	bool ActivityManager::handleEvent(const sf::Event& event)
 	{
-		return stateStack->foreach([&event](const ActivityRef& state) {
+		return stateStack->foreach_if([&event](const ActivityRef& state) {
 			return state->handleEvent(event);
 		});
 	}
 
 	bool ActivityManager::preUpdate(sf::Time dt)
 	{
-		return stateStack->foreach([dt](const ActivityRef& state) {
+		return stateStack->foreach_if([dt](const ActivityRef& state) {
 			return state->preUpdate(dt);
 		});
 	}
 
 	bool ActivityManager::update(sf::Time dt)
 	{
-		return stateStack->foreach([dt](const ActivityRef& state) {
+		return stateStack->foreach_if([dt](const ActivityRef& state) {
 			return state->update(dt);
 		});
 	}
 
 	bool ActivityManager::postUpdate(sf::Time dt)
 	{
-		return stateStack->foreach([dt](const ActivityRef& state) {
+		return stateStack->foreach_if([dt](const ActivityRef& state) {
 			return state->postUpdate(dt);
 		});
 	}
@@ -41,7 +41,6 @@ namespace oct
 	{
 		stateStack->foreach([](const ActivityRef& state) {
 			state->renderPreUpdate();
-			return true;
 		});
 	}
 
@@ -49,7 +48,6 @@ namespace oct
 	{
 		stateStack->foreach([](const ActivityRef& state) {
 			state->renderUpdate();
-			return true;
 		});
 	}
 
@@ -57,7 +55,6 @@ namespace oct
 	{
 		stateStack->foreach([](const ActivityRef& state) {
 			state->renderPostUpdate();
-			return true;
 		});
 	}
 }
