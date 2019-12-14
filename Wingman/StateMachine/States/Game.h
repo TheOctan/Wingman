@@ -104,6 +104,14 @@ public:
 	Game(RenderWindow* window);
 	virtual ~Game();
 
+	// ID of players
+	enum PlayerID
+	{
+		firstPlayer,
+		secondPlayer,
+		thirdPlayer
+	};
+
 	//Accessors
 	inline RenderWindow& getWindow() { return *this->window; }
 
@@ -121,8 +129,10 @@ public:
 	void initMap();
 	void initialize();
 
+	void addPlayer(PlayerID id);
 	void updateView(const float& dt);
 	void restartUpdate();
+	void restartPlayers();
 	void setEndingScoreboard();
 	void updateTimers(const float& dt);
 	void updateTimersUnpaused(const float& dt);
