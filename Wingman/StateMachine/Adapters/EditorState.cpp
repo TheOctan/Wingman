@@ -17,7 +17,6 @@ bool EditorState::handleEvent(const sf::Event& event)
 			requestStackPop();
 			requestStackPush(States::Game);
 			requestStackPush(States::MainMenu);
-			Player::players = 0;
 		}
 
 	return false;

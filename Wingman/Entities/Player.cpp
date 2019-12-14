@@ -133,7 +133,7 @@ Player::Player(
 	this->sprite.setTexture(Player::bodyTextures[0]);
 	this->sprite.setScale(0.08f, 0.08f);
 	this->sprite.setColor(Color(10, 10, 10, 255));
-	this->sprite.setPosition(Vector2f(400.f, 300.f + Player::playerNr * 150.f));
+	this->sprite.setPosition(Vector2f(400.f, 300.f));
 
 	//Update positions
 	this->playerCenter.x = this->sprite.getPosition().x +
@@ -874,7 +874,7 @@ std::string Player::getStatsAsString()const
 void Player::reset()
 {
 	//Reset sprites
-	this->sprite.setPosition(Vector2f(400.f, 300.f + Player::playerNr * 150.f));
+	this->sprite.setPosition(Vector2f(400.f, 300.f));
 
 	//Reset stats
 	this->hpMax = 10;

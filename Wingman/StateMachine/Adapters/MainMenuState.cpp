@@ -1,5 +1,4 @@
 #include "MainMenuState.h"
-#include "Player.h"
 
 std::string MainMenuState::fontPath = "Fonts/Dosis-Light.ttf";
 
@@ -72,7 +71,6 @@ void MainMenuState::onStartButtonClick(gui::Widget* sender, const WidgetEventArg
 {
 	requestStateClear();
 	requestStackPush(States::Game);
-	Player::players = 0;
 }
 
 void MainMenuState::onEditButtonClick(gui::Widget* sender, const WidgetEventArgs& e)

@@ -1,5 +1,4 @@
 #include "PauseState.h"
-#include "Player.h"
 
 PauseState::PauseState(oct::StateStack* stack, Context context)
 	: StateComponent(stack, context)
@@ -69,7 +68,6 @@ void PauseState::onRestartBottonClick(gui::Widget* sender, const WidgetEventArgs
 {
 	requestStateClear();
 	requestStackPush(States::Game);
-	Player::players = 0;
 }
 
 void PauseState::onMenuBottonClick(gui::Widget* sender, const WidgetEventArgs& e)
