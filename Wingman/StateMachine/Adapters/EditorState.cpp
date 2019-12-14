@@ -11,15 +11,24 @@ bool EditorState::handleEvent(const sf::Event& event)
 {
 	StateComponent::handleEvent(event);
 
-	return true;
+	if(event.type == sf::Event::KeyPressed)
+		if (event.key.code == sf::Keyboard::Escape)
+		{
+			requestStackPop();
+			requestStackPush(States::Game);
+			requestStackPush(States::MainMenu);
+			Player::players = 0;
+		}
+
+	return false;
 }
 
-bool EditorState::update(sf::Time dt)
+bool EditorState::postUpdate(sf::Time dt)
 {
-	StateComponent::update(dt);
+	StateComponent::postUpdate(dt);
 	editor.update(dt.asSeconds());
 
-	return true;
+	return false;
 }
 
 void EditorState::renderUpdate()

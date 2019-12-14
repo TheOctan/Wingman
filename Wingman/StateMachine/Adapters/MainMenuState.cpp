@@ -74,7 +74,8 @@ void MainMenuState::onStartButtonClick(gui::Widget* sender, const WidgetEventArg
 
 void MainMenuState::onEditButtonClick(gui::Widget* sender, const WidgetEventArgs& e)
 {
-
+	requestStateClear();
+	requestStackPush(States::Editor);
 }
 
 void MainMenuState::onSettingsButtonClick(gui::Widget* sender, const WidgetEventArgs& e)
