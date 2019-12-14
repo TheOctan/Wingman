@@ -17,6 +17,12 @@ bool GameState::handleEvent(const sf::Event& event)
 {
 	StateComponent::handleEvent(event);
 
+	if(event.type == sf::Event::KeyPressed)
+		if (event.key.code == sf::Keyboard::Escape)
+		{
+			requestStackPush(States::PauseMenu);
+		}
+
 	return false;
 }
 

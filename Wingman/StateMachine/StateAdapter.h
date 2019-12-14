@@ -10,5 +10,6 @@
 #include "Adapters/EditorState.h"
 #include "Adapters/MainMenuState.h"
 #include "Adapters/SettingsState.h"
+#include "Adapters/PauseState.h"
 
 #endif // !STATE_ADAPTER_H

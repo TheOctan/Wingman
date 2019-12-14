@@ -278,23 +278,6 @@ void Game::restartUpdate()
 	if (Keyboard::isKeyPressed(Keyboard::F1))
 	{
 		restartPlayers();
-
-		//Reset stage
-		this->mainView.setCenter(Vector2f(
-			this->window->getSize().x / 2,
-			this->window->getSize().y / 2
-		));
-		this->stage->reset(this->mainView);
-
-		//Clear arrays
-		this->enemies.clear();
-		this->upgrades.clear();
-		this->pickups.clear();
-		this->bosses.clear();
-		this->powerups.clear();
-		this->textTags.clear();
-		this->particles.clear();
-
 	}
 }
 
@@ -314,6 +297,22 @@ void Game::restartPlayers()
 	this->bossEncounter = false;
 	this->enemySpawnTimerMax = 35.f; //ALSO IN CONSTUCTOR!
 	this->scoreTimer.restart();
+
+	//Reset stage
+	this->mainView.setCenter(Vector2f(
+		this->window->getSize().x / 2,
+		this->window->getSize().y / 2
+	));
+	this->stage->reset(this->mainView);
+
+	//Clear arrays
+	this->enemies.clear();
+	this->upgrades.clear();
+	this->pickups.clear();
+	this->bosses.clear();
+	this->powerups.clear();
+	this->textTags.clear();
+	this->particles.clear();
 }
 
 void Game::setEndingScoreboard()

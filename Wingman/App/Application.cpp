@@ -123,6 +123,7 @@ void Application::registerStates()
 	machine.registerState<EditorState>(States::Editor);
 	machine.registerState<MainMenuState>(States::MainMenu);
 	machine.registerState<SettingsState>(States::Settings);
+	machine.registerState<PauseState>(States::PauseMenu);
 }
 
 oct::Activity::Context Application::getBaseContext()
