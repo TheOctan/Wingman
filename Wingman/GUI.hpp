@@ -1,0 +1,23 @@
+#pragma once
+
+#ifndef __GUI_HPP__
+#define __GUI_HPP__
+
+////////////////////////////////////////////////////////////
+// Headers
+////////////////////////////////////////////////////////////
+
+#include"GUI/StackMenu.hpp"
+#include"GUI/Button.hpp"
+#include"GUI/TextBox.hpp"
+#include"GUI/ScrollBar.hpp"
+#include"GUI/Lock.hpp"
+
+#endif // !__GUI_HPP__
+
+////////////////////////////////////////////////////////////
+/// \defgroup GUI: graphic user interface module
+///
+/// graphic user interface module: StackMenu, Button, TextBox, ...
+///
+////////////////////////////////////////////////////////////

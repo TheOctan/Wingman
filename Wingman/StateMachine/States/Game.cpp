@@ -213,32 +213,6 @@ void Game::initialize()
 	//Init players
 	this->players.add(Player());
 
-	//this->players.add(Player(
-	//	Keyboard::Numpad8,
-	//	Keyboard::Numpad5,
-	//	Keyboard::Numpad4,
-	//	Keyboard::Numpad6,
-	//	Keyboard::RControl,
-	//	Keyboard::RShift,
-	//	Keyboard::Numpad7,
-	//	Keyboard::Numpad1,
-	//	Keyboard::Numpad2,
-	//	Keyboard::Numpad3,
-	//	Keyboard::Numpad0));
-
-	//this->players.add(Player(
-	//	Keyboard::I,
-	//	Keyboard::K,
-	//	Keyboard::J,
-	//	Keyboard::L,
-	//	Keyboard::RAlt,
-	//	Keyboard::Period,
-	//	Keyboard::Comma,
-	//	Keyboard::Num8,
-	//	Keyboard::Num9,
-	//	Keyboard::Num0,
-	//	Keyboard::Add));
-
 	this->playersAlive = this->players.size();
 
 	//Init enemies
@@ -252,6 +226,48 @@ void Game::initialize()
 	this->initUI();
 }
 
+void Game::addPlayer(PlayerID id)
+{
+	//Init players
+	switch (id)
+	{
+	case Game::secondPlayer:
+		this->players.add(Player(
+			Keyboard::Numpad8,
+			Keyboard::Numpad5,
+			Keyboard::Numpad4,
+			Keyboard::Numpad6,
+			Keyboard::RControl,
+			Keyboard::RShift,
+			Keyboard::Numpad7,
+			Keyboard::Numpad1,
+			Keyboard::Numpad2,
+			Keyboard::Numpad3,
+			Keyboard::Numpad0));
+		break;
+
+	case Game::thirdPlayer:
+		this->players.add(Player(
+			Keyboard::I,
+			Keyboard::K,
+			Keyboard::J,
+			Keyboard::L,
+			Keyboard::RAlt,
+			Keyboard::Period,
+			Keyboard::Comma,
+			Keyboard::Num8,
+			Keyboard::Num9,
+			Keyboard::Num0,
+			Keyboard::Add));
+		break;
+
+	default:
+		break;
+	}
+
+	restartPlayers();
+}
+
 void Game::updateView(const float& dt)
 {
 	this->mainView.move(this->stage->getScrollSpeed() * dt * this->dtMultiplier, 0.f);
@@ -261,38 +277,42 @@ void Game::restartUpdate()
 {
 	if (Keyboard::isKeyPressed(Keyboard::F1))
 	{
-		for (size_t i = 0; i < this->players.size(); i++)
-		{
-			this->players[i].reset();
-		}
-
-		this->playersAlive = this->players.size();
-		this->score = 0;
-		this->scoreMultiplier = 1;
-		this->multiplierAdder = 0;
-		this->scoreTime = 0;
-		this->difficulty = 0;
-		this->bossEncounter = false;
-		this->enemySpawnTimerMax = 35.f; //ALSO IN CONSTUCTOR!
-		this->scoreTimer.restart();
-
-		//Reset stage
-		this->mainView.setCenter(Vector2f(
-			this->window->getSize().x / 2,
-			this->window->getSize().y / 2
-		));
-		this->stage->reset(this->mainView);
-
-		//Clear arrays
-		this->enemies.clear();
-		this->upgrades.clear();
-		this->pickups.clear();
-		this->bosses.clear();
-		this->powerups.clear();
-		this->textTags.clear();
-		this->particles.clear();
-
+		restartPlayers();
 	}
+}
+
+void Game::restartPlayers()
+{
+	for (size_t i = 0; i < this->players.size(); i++)
+	{
+		this->players[i].reset();
+	}
+
+	this->playersAlive = this->players.size();
+	this->score = 0;
+	this->scoreMultiplier = 1;
+	this->multiplierAdder = 0;
+	this->scoreTime = 0;
+	this->difficulty = 0;
+	this->bossEncounter = false;
+	this->enemySpawnTimerMax = 35.f; //ALSO IN CONSTUCTOR!
+	this->scoreTimer.restart();
+
+	//Reset stage
+	this->mainView.setCenter(Vector2f(
+		this->window->getSize().x / 2,
+		this->window->getSize().y / 2
+	));
+	this->stage->reset(this->mainView);
+
+	//Clear arrays
+	this->enemies.clear();
+	this->upgrades.clear();
+	this->pickups.clear();
+	this->bosses.clear();
+	this->powerups.clear();
+	this->textTags.clear();
+	this->particles.clear();
 }
 
 void Game::setEndingScoreboard()
@@ -1605,9 +1625,6 @@ void Game::drawParticles()
 
 void Game::draw()
 {
-	//CLEAR AND BEGIN DRAW
-	this->window->clear();
-
 	//Set view
 	this->window->setView(this->mainView);
 
@@ -1641,9 +1658,6 @@ void Game::draw()
 	this->window->setView(this->window->getDefaultView());
 
 	this->drawUI();
-
-	//FINISH DRAW
-	this->window->display();
 }
 
 
