@@ -70,7 +70,10 @@ bool SettingsState::handleEvent(const sf::Event& event)
 
 	if (event.type == sf::Event::KeyPressed)
 		if (event.key.code == sf::Keyboard::Escape)
+		{
 			requestStackPop();
+			requestStackPush(States::MainMenu);
+		}
 
 	menu.handleEvent(event);
 
